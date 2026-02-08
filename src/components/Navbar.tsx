@@ -12,24 +12,12 @@ const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
   }, []);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled glass' : ''}`} style={{
-      background: scrolled ? 'rgba(255,255,255,0.9)' : 'transparent',
-      boxShadow: scrolled ? 'var(--shadow-sm)' : 'none'
-    }}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-content">
-        <div className="logo" style={{
-          fontSize: '1.5rem',
-          fontWeight: 800,
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--text-main)'
-        }}>
-          bookmarkk
-        </div>
-        <div className="nav-links">
-          <button className="btn-primary" onClick={onJoinClick} style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>
-            Join Season 1
-          </button>
-        </div>
+        <div className="nav-logo">bookmarkk</div>
+        <button className="btn-primary" onClick={onJoinClick}>
+          Join Season 1
+        </button>
       </div>
     </nav>
   );
