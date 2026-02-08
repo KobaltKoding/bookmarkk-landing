@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 
-
-
-const Navbar = () => {
+const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -13,21 +11,24 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled glass' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled glass' : ''}`} style={{
+      background: scrolled ? 'rgba(255,255,255,0.9)' : 'transparent',
+      boxShadow: scrolled ? 'var(--shadow-sm)' : 'none'
+    }}>
       <div className="container nav-content">
-        <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>bookmarkk</div>
+        <div className="logo" style={{
+          fontSize: '1.5rem',
+          fontWeight: 800,
+          fontFamily: 'var(--font-heading)',
+          color: 'var(--text-main)'
+        }}>
+          bookmarkk
+        </div>
         <div className="nav-links">
-          <button onClick={() => scrollToSection('mission')}>The Mission</button>
-          <button onClick={() => scrollToSection('how-it-works')}>How it Works</button>
-
+          <button className="btn-primary" onClick={onJoinClick} style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>
+            Join Season 1
+          </button>
         </div>
       </div>
     </nav>
