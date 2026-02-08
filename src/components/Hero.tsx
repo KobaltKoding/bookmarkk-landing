@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import heroPhone from '../assets/hero-phone.png';
+import featureLeaderboard from '../assets/feature-leaderboard.png';
 
 interface HeroProps {
   onJoinClick: () => void;
@@ -8,39 +8,40 @@ interface HeroProps {
 const Hero = ({ onJoinClick }: HeroProps) => {
   return (
     <section className="hero" id="hero">
-      <div className="container hero-grid">
+      <div className="container">
         <motion.div
-          className="hero-content"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          style={{ maxWidth: '800px', margin: '0 auto' }}
         >
-          {/* Badge removed as requested */}
           <h1 className="hero-title">
-            Stop collecting books. <br />
-            <span className="gradient-text">Start conquering them.</span>
+            Turn reading into a{' '}
+            <span className="highlight">sport you can win</span>
           </h1>
+
           <p className="hero-subtitle">
-            The habit engine that turns your reading list into a quest.
-            Build identity through verified progress and long-form learning.
+            Bookmarkk is Strava for books—prove your progress, compete weekly,
+            build a reading identity.
           </p>
 
-          <div className="cta-group mobile-optimized">
-            <button className="btn-primary large" onClick={onJoinClick}>Join Waitlist</button>
-            <p className="cta-subtext">Join 500+ High-Intent Readers</p>
+          <div style={{ marginBottom: '3.5rem' }}>
+            <button className="btn-primary large" onClick={onJoinClick}>
+              Join Season 1
+            </button>
           </div>
         </motion.div>
 
         <motion.div
-          className="hero-image"
-          initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          className="hero-image-wrapper"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
         >
-          <div className="phone-wrapper">
-            <div className="phone-glow"></div>
-            <img src={heroPhone} alt="Bookmarkk App Mockup" />
-          </div>
+          <img
+            src={featureLeaderboard}
+            alt="Bookmarkk weekly league leaderboard showing usernames, XP scores, and rankings"
+          />
         </motion.div>
       </div>
     </section>
