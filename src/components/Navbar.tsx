@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 
-
-
-const Navbar = () => {
+const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -13,22 +11,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled glass' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-content">
-        <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>bookmarkk</div>
-        <div className="nav-links">
-          <button onClick={() => scrollToSection('mission')}>The Mission</button>
-          <button onClick={() => scrollToSection('how-it-works')}>How it Works</button>
-
-        </div>
+        <div className="nav-logo">bookmarkk</div>
+        <button className="btn-primary" onClick={onJoinClick}>
+          Join Season 1
+        </button>
       </div>
     </nav>
   );

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Hero from './components/Hero';
-import IntentGap from './components/IntentGap';
+import ProblemSection from './components/ProblemSection';
 import HowItWorks from './components/HowItWorks';
-import Mission from './components/Mission';
-import Features from './components/Features';
+import SocialProof from './components/SocialProof';
+import Differentiation from './components/Differentiation';
+import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import WaitlistModal from './components/WaitlistModal';
@@ -25,12 +26,13 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar onJoinClick={openModal} />
       <Hero onJoinClick={openModal} />
-      <Mission />
-      <IntentGap />
+      <ProblemSection />
       <HowItWorks />
-      <Features />
+      <SocialProof />
+      <Differentiation />
+      <FinalCTA onJoinClick={openModal} />
       <Footer onOpenLegal={openLegalModal} />
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
       <LegalModal isOpen={isLegalModalOpen} onClose={closeLegalModal} initialTab={legalTab} />
