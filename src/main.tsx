@@ -9,7 +9,7 @@ import { PH_API_KEY } from './config'
 posthog.init(PH_API_KEY, {
   api_host: 'https://us.i.posthog.com',
   person_profiles: 'identified_only',
-  capture_pageview: false // We can manually capture if needed, or set to true
+  capture_pageview: true
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
