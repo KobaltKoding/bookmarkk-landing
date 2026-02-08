@@ -1,1 +1,1 @@
-export const PH_API_KEY = 'phc_TEST_KEY_PLACEHOLDER';
+export const PH_API_KEY = import.meta.env.VITE_POSTHOG_KEY || 'phc_PLACEHOLDER';
