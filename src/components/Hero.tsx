@@ -25,10 +25,8 @@ const Hero = ({ onJoinClick }: HeroProps) => {
             Build identity through verified progress and long-form learning.
           </p>
 
-          <div className="cta-group">
-            <div className="cta-wrapper">
-              <button className="btn-primary large" onClick={onJoinClick}>Join Waitlist</button>
-            </div>
+          <div className="cta-group mobile-optimized">
+            <button className="btn-primary large" onClick={onJoinClick}>Join Waitlist</button>
             <p className="cta-subtext">Join 500+ High-Intent Readers</p>
           </div>
         </motion.div>

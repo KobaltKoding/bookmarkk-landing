@@ -1,9 +1,13 @@
-const Footer = () => {
+interface FooterProps {
+  onOpenLegal: (tab: 'privacy' | 'terms') => void;
+}
+
+const Footer = ({ onOpenLegal }: FooterProps) => {
   return (
     <footer className="footer">
       <div className="container footer-content">
         <div className="footer-brand">
-          <div style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Bookmarkk</div>
+          <div style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem', fontFamily: 'var(--font-heading)' }}>bookmarkk</div>
           <p style={{ color: 'var(--text-dim)' }}>Conquer your reading list.</p>
         </div>
 

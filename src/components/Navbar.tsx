@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled glass' : ''}`}>
       <div className="container nav-content">
-        <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>Bookmarkk</div>
+        <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>bookmarkk</div>
         <div className="nav-links">
           <button onClick={() => scrollToSection('mission')}>The Mission</button>
           <button onClick={() => scrollToSection('how-it-works')}>How it Works</button>
