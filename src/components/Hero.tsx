@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import heroPhone from '../assets/hero-phone.png';
+import featureLeaderboard from '../assets/feature-leaderboard.png';
 
 interface HeroProps {
   onJoinClick: () => void;
@@ -7,39 +7,57 @@ interface HeroProps {
 
 const Hero = ({ onJoinClick }: HeroProps) => {
   return (
-    <section className="hero" id="hero">
-      <div className="container hero-grid">
+    <section className="hero" id="hero" style={{ paddingTop: '8rem', paddingBottom: '4rem', background: 'var(--bg-page)' }}>
+      <div className="container" style={{ textAlign: 'center' }}>
         <motion.div
-          className="hero-content"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ maxWidth: '800px', margin: '0 auto' }}
         >
-          {/* Badge removed as requested */}
-          <h1 className="hero-title">
-            Stop collecting books. <br />
-            <span className="gradient-text">Start conquering them.</span>
+          <h1 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+            fontWeight: 800,
+            lineHeight: 1.1,
+            marginBottom: '1.5rem',
+            color: 'var(--text-main)'
+          }}>
+            Turn reading into a <span style={{ color: 'var(--primary)' }}>sport you can win</span>
           </h1>
-          <p className="hero-subtitle">
-            The habit engine that turns your reading list into a quest.
-            Build identity through verified progress and long-form learning.
+
+          <p style={{
+            fontSize: 'clamp(1.125rem, 2vw, 1.5rem)',
+            color: 'var(--text-secondary)',
+            marginBottom: '2.5rem',
+            maxWidth: '600px',
+            margin: '0 auto 2.5rem'
+          }}>
+            Bookmarkk is Strava for books—prove your progress, compete weekly, build a reading identity.
           </p>
 
-          <div className="cta-group mobile-optimized">
-            <button className="btn-primary large" onClick={onJoinClick}>Join Waitlist</button>
-            <p className="cta-subtext">Join 500+ High-Intent Readers</p>
+          <div style={{ marginBottom: '4rem' }}>
+            <button className="btn-primary large" onClick={onJoinClick}>Join Season 1</button>
           </div>
         </motion.div>
 
         <motion.div
           className="hero-image"
-          initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          style={{ maxWidth: '400px', margin: '0 auto' }}
         >
-          <div className="phone-wrapper">
-            <div className="phone-glow"></div>
-            <img src={heroPhone} alt="Bookmarkk App Mockup" />
+          <div style={{
+            borderRadius: '32px',
+            overflow: 'hidden',
+            boxShadow: 'var(--shadow-glow)',
+            border: '8px solid white'
+          }}>
+            <img
+              src={featureLeaderboard}
+              alt="Bookmarkk Leaderboard"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
           </div>
         </motion.div>
       </div>
