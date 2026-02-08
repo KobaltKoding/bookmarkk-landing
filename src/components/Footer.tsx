@@ -13,18 +13,15 @@ const Footer = ({ onOpenLegal }: FooterProps) => {
 
 
 
-        <div className="footer-bottom">
-          <p>© 2026 Bookmarkk. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <a href="#" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy</a>
-            <a href="#" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms</a>
+        <div className="footer-legal">
+          <p>&copy; {new Date().getFullYear()} bookmarkk. All rights reserved.</p>
+          <div className="legal-links">
+            <button onClick={() => onOpenLegal('privacy')} className="legal-link">Privacy Policy</button>
+            <button onClick={() => onOpenLegal('terms')} className="legal-link">Terms of Service</button>
           </div>
         </div>
       </div>
 
-      <style>{`
-
-      `}</style>
     </footer>
   );
 };
