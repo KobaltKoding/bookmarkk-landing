@@ -1,30 +1,36 @@
-import { motion } from 'framer-motion';
-
 const ProblemSection = () => {
   return (
-    <section className="problem-section">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="problem-content"
-        >
-          <h2>
-            70% of people want to read more.{' '}
-            <span style={{ color: 'var(--text-secondary)' }}>
-              Most fail because progress is invisible.
-            </span>
-          </h2>
-          <p>
-            Reading is the only self-improvement habit with no scoreboard. You
-            can't see your momentum. You can't prove comprehension. So the habit
-            quietly dies. <strong style={{ color: 'var(--text-main)' }}>Bookmarkk fixes this.</strong>
-          </p>
-        </motion.div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <h2 className="section-heading-large">
+        Progress you can{' '}
+        <span className="highlight-amber">prove.</span>
+      </h2>
+
+      <div className="section-body-text">
+        <p>
+          70% of people want to read more. Most fail because progress is invisible.
+        </p>
+        <p>
+          No fake streaks. No vanity metrics. Just real, verified reading progress
+          powered by AI-generated quizzes.
+        </p>
+        <p>
+          Your XP is earned by passing chapter quizzes, not self-reported logging.
+          Reading is the only self-improvement habit with no scoreboard—
+          <strong style={{ color: 'rgba(255,255,255,0.9)' }}>bookmarkk fixes this.</strong>
+        </p>
       </div>
-    </section>
+
+      <div className="glass-card">
+        <div className="indicator">
+          <div className="pulse-dot" />
+          <span className="indicator-text">AI Quiz · Chapter 3</span>
+        </div>
+        <p className="quote">
+          "What was the core argument the author made about habit formation?"
+        </p>
+      </div>
+    </div>
   );
 };
 

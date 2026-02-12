@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 const stats = [
   {
     value: '88%',
@@ -11,48 +9,44 @@ const stats = [
     value: '30%',
     label: 'reading 5+ days/week',
     sub: '(up from 8%)',
-    color: 'var(--electric-blue)',
+    color: 'var(--accent-amber)',
   },
   {
     value: '100%',
     label: 'told someone about it',
     sub: '',
-    color: 'var(--accent)',
+    color: 'rgba(255,255,255,0.9)',
   },
   {
     value: '91%',
     label: 'would recommend',
     sub: '',
-    color: 'var(--primary)',
+    color: 'rgba(255,255,255,0.9)',
   },
 ];
 
 const SocialProof = () => {
   return (
-    <section className="social-proof">
-      <div className="container">
-        <h2 className="section-title">Already working for readers like you</h2>
+    <div className="retention-card">
+      <h2>The retention loop that works.</h2>
 
-        <div className="stats-grid">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              className="stat-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="stat-number" style={{ color: stat.color }}>
-                {stat.value}
-              </div>
-              <div className="stat-label">{stat.label}</div>
-              {stat.sub && <div className="stat-sub">{stat.sub}</div>}
-            </motion.div>
-          ))}
-        </div>
+      <div className="retention-grid">
+        {stats.map((stat, index) => (
+          <div key={index} className="retention-item">
+            <h3 style={{ color: stat.color }}>
+              {stat.value} {stat.label}
+            </h3>
+            <p>
+              {stat.sub
+                ? `${stat.sub} — Verified through AI-powered comprehension quizzes and weekly league participation.`
+                : index === 2
+                  ? 'Every single beta user shared bookmarkk with someone. Organic word of mouth built on real results.'
+                  : 'Net promoter score through the roof. Readers who prove their progress become lifelong advocates.'}
+            </p>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,25 +1,44 @@
-import { useState, useEffect } from 'react';
+import { motion, useScroll } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
-  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return scrollY.on("change", (latest) => {
+      setIsScrolled(latest > 50);
+    });
+  }, [scrollY]);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="container nav-content">
-        <div className="nav-logo">bookmarkk</div>
-        <button className="btn-primary" onClick={onJoinClick}>
-          Join Season 1
+    <motion.nav
+      className={`navbar ${isScrolled ? 'navbar--scrolled' : 'navbar--transparent'}`}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <div className="nav-left">
+        <span className="nav-logo">bookmarkk</span>
+        <div className="nav-links">
+          {['Overview', 'Features', 'How It Works', 'Community'].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="nav-right">
+        <button className="btn-nav-cta" onClick={onJoinClick}>
+          <div className="btn-glow" />
+          <span>Join Season 1</span>
         </button>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

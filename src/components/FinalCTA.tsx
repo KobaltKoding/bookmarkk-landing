@@ -1,39 +1,38 @@
-import { motion } from 'framer-motion';
-
 interface FinalCTAProps {
   onJoinClick: () => void;
 }
 
 const FinalCTA = ({ onJoinClick }: FinalCTAProps) => {
   return (
-    <section className="final-cta">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2>Season 1 starts soon</h2>
-          <p className="subtitle">
-            Join the waitlist for early access + founding member perks.
-          </p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+      <h2 className="cta-title">
+        Start reading.<br />
+        Start <span className="highlight">proving.</span>
+      </h2>
 
-          <div style={{ maxWidth: '440px', margin: '0 auto' }}>
-            <button
-              className="btn-primary large"
-              onClick={onJoinClick}
-              style={{ width: '100%' }}
-            >
-              Join Season 1
-            </button>
-            <p className="fine-print">
-              Limited spots. We're starting with a small cohort to iterate fast.
-            </p>
-          </div>
-        </motion.div>
+      <p className="cta-subtitle">
+        Bookmarkk. Where progress is earned, not logged.
+      </p>
+
+      <div className="cta-buttons">
+        <button className="btn-cta-primary" onClick={onJoinClick}>
+          Join Season 1
+        </button>
+        <button
+          className="btn-cta-outline"
+          onClick={() => {
+            const el = document.getElementById('how-it-works');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          See how it works
+        </button>
       </div>
-    </section>
+
+      <p className="cta-fine-print">
+        Limited spots. We're starting with a small cohort to iterate fast.
+      </p>
+    </div>
   );
 };
 
