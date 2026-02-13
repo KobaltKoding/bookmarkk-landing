@@ -3,8 +3,6 @@ import Hero from "@/components/Hero";
 import ProblemSolution from "@/components/ProblemSolution";
 import HowItWorks from "@/components/HowItWorks";
 import InteractiveQuiz from "@/components/InteractiveQuiz";
-import CompleteLoop from "@/components/CompleteLoop";
-import Metrics from "@/components/Metrics";
 import Testimonials from "@/components/Testimonials";
 import ComparisonTable from "@/components/ComparisonTable";
 import FAQ from "@/components/FAQ";
@@ -20,8 +18,6 @@ export default function Home() {
         <ProblemSolution />
         <HowItWorks />
         <InteractiveQuiz />
-        <CompleteLoop />
-        <Metrics />
         <Testimonials />
         <ComparisonTable />
         <FAQ />

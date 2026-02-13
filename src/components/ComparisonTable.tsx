@@ -59,7 +59,7 @@ export default function ComparisonTable() {
           className="glass-card rounded-2xl overflow-hidden"
         >
           {/* Header */}
-          <div className="grid grid-cols-2 border-b border-white/5">
+          <div className="grid grid-cols-2 border-b border-black/5">
             <div className="px-6 py-4 text-sm font-medium text-text-muted">
               Other Apps
             </div>
@@ -75,7 +75,7 @@ export default function ComparisonTable() {
               initial={{ opacity: 0, x: -10 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.3 + i * 0.08 }}
-              className="grid grid-cols-2 border-b border-white/5 last:border-0"
+              className="grid grid-cols-2 border-b border-black/5 last:border-0"
             >
               <div className="px-6 py-4 flex items-center gap-3 text-sm text-text-secondary">
                 <span className="text-red-400 text-xs">✗</span>

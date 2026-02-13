@@ -3,59 +3,20 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const steps = [
-  {
-    number: "01",
-    title: "Read a chapter",
-    description: "Pick any book you're reading. Physical, Kindle, audiobook — doesn't matter.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
-    color: "text-accent-blue",
-    borderColor: "border-accent-blue/30",
-    bgColor: "bg-accent-blue/10",
-  },
-  {
-    number: "02",
-    title: "Take the AI quiz",
-    description: "5 questions on what you just read. Takes about 2 minutes. No stress.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    ),
-    color: "text-accent-purple",
-    borderColor: "border-accent-purple/30",
-    bgColor: "bg-accent-purple/10",
-  },
-  {
-    number: "03",
-    title: "Earn XP & streak",
-    description: "Score 80%+ to pass. XP scales with chapter length. Build your streak daily.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    color: "text-success",
-    borderColor: "border-success/30",
-    bgColor: "bg-success/10",
-  },
-  {
-    number: "04",
-    title: "Climb the league",
-    description: "Compete weekly against other readers. Leaderboards reset every Monday.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
-    color: "text-warning",
-    borderColor: "border-warning/30",
-    bgColor: "bg-warning/10",
-  },
+const loopSteps = [
+  { icon: "📚", label: "Read Chapter", color: "text-accent-blue" },
+  { icon: "✓", label: "Pass Quiz", color: "text-accent-purple" },
+  { icon: "⚡", label: "Earn XP", color: "text-success" },
+  { icon: "🔥", label: "Build Streak", color: "text-warning" },
+  { icon: "🏆", label: "Climb League", color: "text-yellow-400" },
+  { icon: "💪", label: "Feel Progress", color: "text-accent-purple" },
+];
+
+const dayProgress = [
+  { day: "Day 1", xp: 0, streak: 0, league: "Not ranked", progress: 0 },
+  { day: "Day 3", xp: 120, streak: 3, league: "#8", progress: 25 },
+  { day: "Day 7", xp: 340, streak: 7, league: "#3", progress: 55 },
+  { day: "Day 14", xp: 720, streak: 14, league: "#1", progress: 90 },
 ];
 
 export default function HowItWorks() {
@@ -72,40 +33,132 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <p className="text-sm uppercase tracking-wider text-accent-purple mb-3">
-            How it works
+            The habit loop
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Four steps to a reading habit
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            The self-reinforcing loop
           </h2>
+          <p className="text-text-secondary max-w-xl mx-auto">
+            Each step feeds the next. The more you read, the more you earn. The
+            more you earn, the more you want to read.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
+        {/* Loop visualization */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 md:gap-4 mb-20"
+        >
+          {loopSteps.map((step, i) => (
             <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`glass-card rounded-2xl p-6 relative group hover:border-white/10 transition-all duration-300`}
+              key={step.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+              className="flex items-center gap-3"
             >
-              {/* Connector line (desktop) */}
-              {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-3 w-6 border-t border-dashed border-navy-600" />
-              )}
-
-              <div
-                className={`w-12 h-12 rounded-xl ${step.bgColor} flex items-center justify-center ${step.color} mb-4`}
-              >
-                {step.icon}
+              <div className="glass-card rounded-xl px-4 py-3 flex items-center gap-3 border border-black/5">
+                <span className="text-2xl">{step.icon}</span>
+                <span className={`font-semibold text-sm ${step.color}`}>
+                  {step.label}
+                </span>
               </div>
+              {i < loopSteps.length - 1 && (
+                <svg
+                  className="w-4 h-4 text-text-muted hidden md:block" // Corrected text color
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              )}
+            </motion.div>
+          ))}
+          {/* Loop back arrow */}
+          <div className="w-full flex justify-center mt-2">
+            <div className="flex items-center gap-2 text-text-muted text-sm">
+              <svg
+                className="w-4 h-4 rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+              Want to read more
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </motion.div>
 
-              <span className="text-xs font-mono text-text-muted">
-                {step.number}
-              </span>
-              <h3 className="text-lg font-bold mt-1 mb-2">{step.title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                {step.description}
-              </p>
+        {/* Day-by-day progress */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {dayProgress.map((day, i) => (
+            <motion.div
+              key={day.day}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+              className="glass-card rounded-xl p-5 text-center border border-black/5" // Added black border for light mode
+            >
+              <p className="text-sm text-text-muted mb-3">{day.day}</p>
+
+              <div className="space-y-2">
+                <div>
+                  <span className="text-2xl font-bold gradient-text">
+                    {day.xp}
+                  </span>
+                  <span className="text-xs text-text-muted ml-1">XP</span>
+                </div>
+
+                <div className="flex items-center justify-center gap-1">
+                  {day.streak > 0 && <span className="text-sm">🔥</span>}
+                  <span className="text-sm text-text-secondary">
+                    {day.streak > 0
+                      ? `${day.streak}-day streak`
+                      : "No streak"}
+                  </span>
+                </div>
+
+                <div className="text-xs text-text-muted">
+                  League: {day.league}
+                </div>
+
+                {/* Progress bar */}
+                <div className="w-full h-1.5 bg-background rounded-full mt-2 overflow-hidden border border-black/5"> {/* Updated bg and border */}
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={inView ? { width: `${day.progress}%` } : {}}
+                    transition={{ duration: 1, delay: 0.8 + i * 0.15 }}
+                    className="h-full rounded-full bg-gradient-to-r from-accent-purple to-accent-blue"
+                  />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

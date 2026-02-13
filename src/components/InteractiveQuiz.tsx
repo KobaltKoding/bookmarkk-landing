@@ -118,7 +118,7 @@ export default function InteractiveQuiz() {
           className="glass-card rounded-2xl overflow-hidden glow-purple"
         >
           {/* Quiz header */}
-          <div className="border-b border-white/5 px-6 py-4 flex items-center justify-between">
+          <div className="border-b border-black/5 px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-lg">&#128218;</span>
               <div>
@@ -135,10 +135,10 @@ export default function InteractiveQuiz() {
                     <div
                       key={i}
                       className={`w-2 h-2 rounded-full transition-colors ${i < currentQuestion
-                          ? "bg-success"
-                          : i === currentQuestion
-                            ? "bg-accent-purple"
-                            : "bg-navy-600"
+                        ? "bg-success"
+                        : i === currentQuestion
+                          ? "bg-accent-purple"
+                          : "bg-black/10"
                         }`}
                     />
                   ))}
@@ -251,7 +251,7 @@ export default function InteractiveQuiz() {
                       const isCorrect = i === q.correctAnswer;
                       const isSelected = i === selectedAnswer;
                       let optionStyle =
-                        "border-white/10 hover:border-white/20 hover:bg-white/5";
+                        "border-black/5 hover:border-black/10 hover:bg-black/5";
 
                       if (answered) {
                         if (isCorrect) {
@@ -274,17 +274,17 @@ export default function InteractiveQuiz() {
                           onClick={() => handleAnswer(i)}
                           disabled={answered}
                           className={`w-full text-left px-4 py-3 rounded-xl border transition-all duration-200 ${optionStyle} ${answered && isCorrect
-                              ? "animate-[correctPulse_0.6s_ease-out]"
-                              : ""
+                            ? "animate-[correctPulse_0.6s_ease-out]"
+                            : ""
                             }`}
                         >
                           <div className="flex items-center gap-3">
                             <span
                               className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs shrink-0 ${answered && isCorrect
-                                  ? "border-success bg-success text-navy-900"
-                                  : answered && isSelected && !isCorrect
-                                    ? "border-red-500 bg-red-500 text-white"
-                                    : "border-current"
+                                ? "border-success bg-success text-navy-900"
+                                : answered && isSelected && !isCorrect
+                                  ? "border-red-500 bg-red-500 text-white"
+                                  : "border-current"
                                 }`}
                             >
                               {answered && isCorrect

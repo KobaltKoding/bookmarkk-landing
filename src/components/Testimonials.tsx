@@ -84,11 +84,11 @@ export default function Testimonials() {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm">
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-sm text-primary">
                                     {t.initials}
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-white">{t.author}</p>
+                                    <p className="font-semibold text-text-primary">{t.author}</p>
                                     <p className="text-xs text-text-muted">{t.role}</p>
                                 </div>
                             </div>

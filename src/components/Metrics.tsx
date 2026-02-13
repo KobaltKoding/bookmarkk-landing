@@ -53,7 +53,7 @@ export default function Metrics() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="glass-card rounded-3xl p-8 md:p-12 max-w-2xl mx-auto shadow-2xl shadow-purple-900/10 border border-white/10"
+          className="glass-card rounded-3xl p-8 md:p-12 max-w-2xl mx-auto shadow-2xl shadow-purple-900/5 border border-black/5"
         >
           <h3 className="text-2xl font-bold mb-8 text-center">
             The Consistency Effect
@@ -75,8 +75,8 @@ export default function Metrics() {
                     <div
                       key={di}
                       className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center text-sm md:text-base border transition-all duration-500 ${active
-                          ? "bg-success/20 border-success/40 text-success shadow-[0_0_15px_rgba(74,222,128,0.3)] scale-105"
-                          : "bg-white/5 border-white/5 text-text-muted"
+                        ? "bg-success/10 border-success/40 text-success shadow-[0_0_15px_rgba(74,222,128,0.3)] scale-105"
+                        : "bg-black/5 border-black/5 text-text-muted"
                         }`}
                     >
                       {active ? "✓" : ""}

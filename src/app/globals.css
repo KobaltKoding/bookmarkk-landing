@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #050505;
-  --color-card: #121212;
-  --color-card-highlight: #1E1E1E;
-  --color-primary: #5B50FF;
-  --color-secondary: #FFC107;
-  --color-success: #4ADE80;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
+  --color-background: #FDFBF7;
+  /* Warm Paper */
+  --color-card: #FFFFFF;
+  --color-card-highlight: #F4F4F5;
+  --color-primary: #7C3AED;
+  /* Violet 600 */
+  --color-secondary: #5B21B6;
+  /* Violet 800 */
+  --color-success: #059669;
+  /* Emerald 600 */
+  --color-text-primary: #18181B;
+  /* Zinc 900 */
+  --color-text-secondary: #52525B;
+  /* Zinc 600 */
+  --color-text-muted: #A1A1AA;
+  /* Zinc 400 */
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-playfair);
 }
@@ -39,7 +46,7 @@ body {
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -47,15 +54,16 @@ body {
 
 /* Gradient button */
 .gradient-btn {
-  background: linear-gradient(135deg, #5B50FF 0%, #4A40EE 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.1), 0 2px 4px -1px rgba(124, 58, 237, 0.06);
 }
 
 .gradient-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 30px rgba(139, 127, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.2), 0 4px 6px -2px rgba(124, 58, 237, 0.1);
 }
 
 .gradient-btn:active {
@@ -64,14 +72,15 @@ body {
 
 /* Glass card */
 .glass-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(17, 24, 39, 0.8) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
 }
 
 /* Glow effect */
 .glow-purple {
-  box-shadow: 0 0 40px rgba(139, 127, 255, 0.15);
+  box-shadow: 0 0 60px rgba(124, 58, 237, 0.1);
 }
 
 /* Animate in from bottom */

@@ -46,7 +46,7 @@ export default function Hero() {
           {/* Subheadline */}
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-            Bookmarkk is <span className="text-white font-medium">Strava for books</span>.
+            Bookmarkk is <span className="text-text-primary font-medium">Strava for books</span>.
             Prove your reading, compete in leagues, and build your literary identity.
           </p>
 

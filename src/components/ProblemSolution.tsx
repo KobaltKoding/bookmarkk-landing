@@ -19,22 +19,23 @@ export default function ProblemSolution() {
             transition={{ duration: 0.6 }}
           >
             <p className="text-sm uppercase tracking-wider text-text-muted mb-6">
-              The problem
+              The reality
             </p>
-            <div className="space-y-4">
+            <div className="space-y-4 relative">
+              {/* Fade gradient overlay to emphasize "forgotten" state */}
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+
               {[
-                { title: "Atomic Habits", date: "Started: Jan 1", opacity: 1, status: "Reading..." },
+                { title: "Atomic Habits", status: "Started: Jan 1", opacity: 1 },
                 {
                   title: "Deep Work",
-                  date: "Last opened: Jan 8",
+                  status: "Stalled: Jan 8",
                   opacity: 0.5,
-                  status: "Stalled",
                 },
                 {
-                  title: "The Psychology of Money",
-                  date: "Abandoned: Jan 15",
-                  opacity: 0.2,
-                  status: "Forgotten",
+                  title: "Psychology of Money",
+                  status: "Forgotten: Jan 15",
+                  opacity: 0.2, // Very faint
                 },
               ].map((book, i) => (
                 <motion.div
@@ -42,35 +43,21 @@ export default function ProblemSolution() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
-                  style={{ opacity: inView ? book.opacity : 0 }}
-                  className="glass-card rounded-xl p-4 flex items-center gap-4"
+                  className={`glass-card rounded-xl p-5 flex items-center gap-4 transition-all duration-500`}
+                  style={{
+                    opacity: inView ? book.opacity : 0,
+                    filter: i === 2 ? "blur(1px)" : "none", // Blur the forgotten one
+                  }}
                 >
-                  <div className="w-10 h-14 rounded bg-navy-600/80 flex items-center justify-center text-xl shrink-0">
+                  <div className={`w-12 h-16 rounded shadow-sm flex items-center justify-center text-2xl shrink-0 ${i === 0 ? "bg-accent-blue/20 text-accent-blue" : "bg-black/5 text-text-muted"}`}>
                     &#128214;
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p
-                      className={`font-medium ${
-                        book.opacity < 0.5
-                          ? "line-through text-text-muted"
-                          : "text-white"
-                      }`}
-                    >
+                    <p className={`font-semibold text-lg ${i === 0 ? "text-text-primary" : "text-text-secondary"}`}>
                       {book.title}
                     </p>
-                    <p className="text-sm text-text-muted">{book.date}</p>
+                    <p className="text-sm text-text-muted">{book.status}</p>
                   </div>
-                  <span
-                    className={`text-xs px-2 py-1 rounded-full ${
-                      book.opacity === 1
-                        ? "bg-accent-purple/20 text-accent-purple"
-                        : book.opacity === 0.5
-                        ? "bg-warning/20 text-warning"
-                        : "bg-red-500/20 text-red-400"
-                    }`}
-                  >
-                    {book.status}
-                  </span>
                 </motion.div>
               ))}
             </div>
@@ -82,30 +69,22 @@ export default function ProblemSolution() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-sm uppercase tracking-wider text-accent-purple mb-6">
-              The solution
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              70% of people want to read more.
-              <br />
-              <span className="text-text-secondary">
-                Most fail because progress is invisible.
-              </span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight text-text-primary">
+              Your bookshelf is a <br />
+              <span className="text-text-secondary">graveyard of good intentions.</span>
             </h2>
-            <div className="space-y-4 text-text-secondary leading-relaxed">
+            <div className="space-y-6 text-lg text-text-secondary leading-relaxed">
               <p>
-                Reading is the only self-improvement habit with no scoreboard.
-                You can&apos;t see momentum. You can&apos;t prove comprehension.
-                So the habit dies quietly.
-              </p>
-              <p className="text-white font-semibold text-lg">
-                Bookmarkk fixes this.
+                Buying books feels like progress. But without a system, they just collect dust.
               </p>
               <p>
-                AI-generated quizzes verify you actually read each chapter.
-                Weekly leagues create competition. Streaks build momentum. Your
-                progress becomes real, visible, and impossible to fake.
+                You start them with energy. You get distracted. You forget them in a week. The guilt piles up with the unread pages.
               </p>
+              <div className="pt-4">
+                <p className="text-accent-purple font-bold text-xl">
+                  Turn intent into action.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
