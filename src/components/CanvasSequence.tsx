@@ -15,7 +15,7 @@ const CanvasSequence = () => {
         const ctx = canvas.getContext("2d", { alpha: false });
         if (!ctx) return;
 
-        ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = true;
 
         /* ── 1. Load all 80 images ── */
         const images: HTMLImageElement[] = [];
@@ -119,7 +119,7 @@ const CanvasSequence = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            ctx.imageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = true;
 
             if (ready) draw(currentFrameIndex);
         }
@@ -160,7 +160,7 @@ const CanvasSequence = () => {
                     display: "block",
                     width: "100%",
                     height: "100%",
-                    imageRendering: "pixelated",
+                    // imageRendering: "pixelated",
                     willChange: "transform",
                     transform: "translate3d(0,0,0)",
                     backfaceVisibility: "hidden"
