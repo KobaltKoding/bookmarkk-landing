@@ -6,7 +6,6 @@ const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Magnetic/Fluid scroll response
-  const navOpacity = useTransform(scrollY, [0, 50], [0, 1]);
   const navScale = useTransform(scrollY, [0, 50], [1, 0.98]);
 
   useEffect(() => {
