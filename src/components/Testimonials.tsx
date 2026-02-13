@@ -70,7 +70,7 @@ export default function Testimonials() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className={`glass-card p-8 rounded-2xl flex flex-col justify-between ${i === 3 || i === 4 ? "md:col-span-1 lg:col-span-1" : ""}`}
+                            className={`bg-zinc-900/90 border border-white/[0.08] p-8 rounded-2xl flex flex-col justify-between ${i === 3 || i === 4 ? "md:col-span-1 lg:col-span-1" : ""}`}
                         >
                             <div className="mb-6">
                                 <div className="flex gap-1 mb-4 text-warning">

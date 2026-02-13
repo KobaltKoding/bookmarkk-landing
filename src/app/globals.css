@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #FDFBF7;
-  /* Warm Paper */
-  --color-card: #FFFFFF;
-  --color-card-highlight: #F4F4F5;
-  --color-primary: #7C3AED;
+  --color-background: #050505;
+  /* Deep Black */
+  --color-card: rgba(255, 255, 255, 0.03);
+  --color-card-highlight: rgba(255, 255, 255, 0.05);
+  --color-primary: #A78BFA;
+  /* Violet 400 */
+  --color-secondary: #7C3AED;
   /* Violet 600 */
-  --color-secondary: #5B21B6;
-  /* Violet 800 */
-  --color-success: #059669;
-  /* Emerald 600 */
-  --color-text-primary: #18181B;
-  /* Zinc 900 */
-  --color-text-secondary: #52525B;
-  /* Zinc 600 */
-  --color-text-muted: #A1A1AA;
+  --color-success: #10B981;
+  /* Emerald 500 */
+  --color-text-primary: #FAFAFA;
+  /* Zinc 50 */
+  --color-text-secondary: #A1A1AA;
   /* Zinc 400 */
+  --color-text-muted: #52525B;
+  /* Zinc 600 */
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-playfair);
 }
@@ -70,12 +70,13 @@ body {
   transform: translateY(0);
 }
 
-/* Glass card */
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* Glass card using @utility directive for Tailwind v4 */
+@utility glass-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Glow effect */

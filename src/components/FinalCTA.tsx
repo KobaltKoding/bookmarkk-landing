@@ -14,7 +14,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="glass-card rounded-3xl p-12 text-center relative overflow-hidden"
+          className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-3xl p-12 text-center relative overflow-hidden"
         >
           {/* Background glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent-purple/10 rounded-full blur-[120px] pointer-events-none" />

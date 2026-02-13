@@ -115,10 +115,10 @@ export default function InteractiveQuiz() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="glass-card rounded-2xl overflow-hidden glow-purple"
+          className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-2xl overflow-hidden glow-purple"
         >
           {/* Quiz header */}
-          <div className="border-b border-black/5 px-6 py-4 flex items-center justify-between">
+          <div className="border-b border-white/5 px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-lg">&#128218;</span>
               <div>
@@ -138,7 +138,7 @@ export default function InteractiveQuiz() {
                         ? "bg-success"
                         : i === currentQuestion
                           ? "bg-accent-purple"
-                          : "bg-black/10"
+                          : "bg-white/10"
                         }`}
                     />
                   ))}
@@ -165,7 +165,7 @@ export default function InteractiveQuiz() {
                     Ready to test your knowledge?
                   </h3>
                   <p className="text-text-secondary mb-6">
-                    3 questions. 2 minutes. See how Bookmarkk quizzes work.
+                    See how Bookmarkk quizzes work.
                   </p>
                   <button
                     onClick={() => setStarted(true)}
@@ -251,7 +251,7 @@ export default function InteractiveQuiz() {
                       const isCorrect = i === q.correctAnswer;
                       const isSelected = i === selectedAnswer;
                       let optionStyle =
-                        "border-black/5 hover:border-black/10 hover:bg-black/5";
+                        "border-white/5 hover:border-white/10 hover:bg-white/5";
 
                       if (answered) {
                         if (isCorrect) {

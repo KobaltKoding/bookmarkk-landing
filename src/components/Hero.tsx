@@ -9,12 +9,25 @@ import ProfileScreen from "./hero-screens/ProfileScreen";
 export default function Hero() {
   const [currentScreen, setCurrentScreen] = useState(0);
 
+  // Auto-rotate
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentScreen((prev) => (prev + 1) % 3);
-    }, 4000);
+    }, 3000); // Speed up loop
     return () => clearInterval(interval);
   }, []);
+
+  // Drag handler
+  const onDragEnd = (event: any, info: any) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      // Swiped Right -> Previous
+      setCurrentScreen((prev) => (prev - 1 + 3) % 3);
+    } else if (info.offset.x < -swipeThreshold) {
+      // Swiped Left -> Next
+      setCurrentScreen((prev) => (prev + 1) % 3);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
@@ -36,18 +49,15 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Main headline */}
-          <h1 className="text-5xl md:text-7xl font-serif font-bold leading-[1.1] tracking-tight mb-6">
-            Turn reading into a
+          <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            <span className="text-text-muted">Stop wanting to read.</span>
             <br />
-            <span className="gradient-text">sport you can win</span>
+            <span className="gradient-text">Start being a Reader.</span>
           </h1>
 
           {/* Subheadline */}
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-            Bookmarkk is <span className="text-text-primary font-medium">Strava for books</span>.
-            Prove your reading, compete in leagues, and build your literary identity.
+          <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+            <strong className="text-text-primary font-semibold">Bookmarkk</strong> turns every chapter into <span className="text-text-primary font-medium">proof of progress</span> — with AI quizzes, streaks, and leagues that make your reading habit stick.
           </p>
 
           {/* CTA */}
@@ -72,61 +82,81 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Phone mockup */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="mt-16 relative mx-auto max-w-sm"
-        >
-          <div className="relative mx-auto w-72 md:w-80">
-            {/* Phone frame */}
-            <div className="glass-card rounded-[2.5rem] p-3 glow-purple">
-              <div className="bg-background rounded-[2rem] overflow-hidden h-[540px] relative">
-                {/* Status bar */}
-                <div className="flex items-center justify-between px-6 py-3 text-xs text-secondary absolute top-0 left-0 right-0 z-10">
-                  <span>9:41</span>
-                  <div className="flex gap-1">
-                    <div className="w-4 h-2 rounded-sm bg-text-secondary/40" />
+        {/* Phone carousel */}
+        <div className="mt-20 relative h-[600px] w-full max-w-[1000px] mx-auto flex items-center justify-center perspective-[1000px]">
+          {[0, 1, 2].map((index) => {
+            // Calculate position: 0=Center, 1=Right, 2=Left (relative to current)
+            const position = (index - currentScreen + 3) % 3;
+
+            let variants = {};
+
+            // Center
+            if (position === 0) {
+              variants = {
+                x: 0,
+                scale: 1,
+                opacity: 1,
+                zIndex: 20,
+                rotate: 0,
+              };
+            }
+            // Right
+            else if (position === 1) {
+              variants = {
+                x: '50%', // Percentages work well for responsive spacing
+                scale: 0.8,
+                opacity: 0.4,
+                zIndex: 10,
+                rotate: 15,
+              };
+            }
+            // Left
+            else {
+              variants = {
+                x: '-50%',
+                scale: 0.8,
+                opacity: 0.4,
+                zIndex: 10,
+                rotate: -15,
+              };
+            }
+
+            // Override for tighter visual: 180px vs 220px
+            if (position === 1) variants = { ...variants, x: 180 };
+            if (position === 2) variants = { ...variants, x: -180 };
+
+            return (
+              <motion.div
+                key={index}
+                initial={false}
+                animate={variants}
+                transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.05}
+                onDragEnd={onDragEnd}
+                className="absolute top-0 w-64 md:w-80 origin-bottom cursor-grab active:cursor-grabbing"
+              >
+                <div className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-[2.5rem] p-3 glow-purple">
+                  <div className="bg-background rounded-[2rem] overflow-hidden h-[540px] relative pointer-events-none select-none">
+                    {/* Status bar */}
+                    <div className="flex items-center justify-between px-6 py-3 text-xs text-secondary absolute top-0 left-0 right-0 z-10">
+                      <span>9:41</span>
+                      <div className="flex gap-1">
+                        <div className="w-4 h-2 rounded-sm bg-text-secondary/40" />
+                      </div>
+                    </div>
+                    <div className="h-full pt-8">
+                      {index === 0 && <LeaderboardScreen />}
+                      {index === 1 && <QuizScreen />}
+                      {index === 2 && <ProfileScreen />}
+                    </div>
                   </div>
                 </div>
-
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentScreen}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.4 }}
-                    className="h-full pt-8"
-                  >
-                    {currentScreen === 0 && <LeaderboardScreen />}
-                    {currentScreen === 1 && <QuizScreen />}
-                    {currentScreen === 2 && <ProfileScreen />}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* Floating elements */}
-            <motion.div
-              animate={{ y: [-5, 5, -5] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-12 top-20 glass-card px-3 py-2 rounded-xl text-sm"
-            >
-              <span className="text-success font-semibold">+80 XP</span>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [5, -5, 5] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-14 top-44 glass-card px-3 py-2 rounded-xl text-sm"
-            >
-              <span>&#9989;</span>{" "}
-              <span className="text-text-secondary">Quiz passed</span>
-            </motion.div>
-          </div>
-        </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

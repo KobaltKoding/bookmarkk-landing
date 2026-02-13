@@ -5,11 +5,13 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,14 +26,18 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} antialiased`}>
+      <body className="bg-background text-foreground antialiased selection:bg-accent-purple/30">
+        {children}
+      </body>
     </html>
   );
 }
