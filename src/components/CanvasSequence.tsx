@@ -15,7 +15,8 @@ const CanvasSequence = () => {
         const ctx = canvas.getContext("2d", { alpha: false });
         if (!ctx) return;
 
-        ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
 
         /* ── 1. Load all 80 images ── */
         const images: HTMLImageElement[] = [];
@@ -54,21 +55,12 @@ const CanvasSequence = () => {
 
             const { width, height } = canvas;
             const imgAspect = 16 / 9;
-            const canvasAspect = width / height;
 
-            let drawWidth, drawHeight, offsetX, offsetY;
-
-            if (canvasAspect > imgAspect) {
-                drawHeight = height;
-                drawWidth = height * imgAspect;
-                offsetX = (width - drawWidth) / 2;
-                offsetY = 0;
-            } else {
-                drawWidth = width;
-                drawHeight = width / imgAspect;
-                offsetX = 0;
-                offsetY = (height - drawHeight) / 2;
-            }
+            // Always fill by height (cover), crop sides on portrait screens
+            const drawHeight = height;
+            const drawWidth = height * imgAspect;
+            const offsetX = (width - drawWidth) / 2;
+            const offsetY = 0;
 
             ctx.fillStyle = "#050505";
             ctx.fillRect(0, 0, width, height);
@@ -125,7 +117,8 @@ const CanvasSequence = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            ctx.imageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
 
             if (ready) draw(currentFrameIndex);
         }
@@ -166,7 +159,6 @@ const CanvasSequence = () => {
                     display: "block",
                     width: "100%",
                     height: "100%",
-                    imageRendering: "pixelated",
                     willChange: "transform",
                     transform: "translate3d(0,0,0)",
                     backfaceVisibility: "hidden"
