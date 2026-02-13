@@ -12,9 +12,8 @@ const CanvasSequence = () => {
     const ctx = canvas.getContext("2d", { alpha: false }); // Optimize for opaque background
     if (!ctx) return;
 
-    // High quality smoothing as requested
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
+    // ── GPU OPTIMIZATION: Disable Image Smoothing for Crisp Edges ──
+    ctx.imageSmoothingEnabled = false;
 
     /* ── 1. Load all 80 images ── */
     const images: HTMLImageElement[] = [];
@@ -26,9 +25,9 @@ const CanvasSequence = () => {
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
-      img.decoding = "sync"; // Require synchronous decoding
+      img.decoding = "sync"; // Synchronous decoding to prevent blurs
 
-      // Prioritize pre-warming frames 20 through 60 (The Fan Peak)
+      // Prioritize "The Fan Peak" frames
       if (i >= 20 && i <= 60) {
         img.fetchPriority = "high";
       }
@@ -53,51 +52,64 @@ const CanvasSequence = () => {
       if (!img || !img.complete || !canvas || !ctx) return;
 
       const { width, height } = canvas;
-
-      // Maintain 16:9 aspect ratio scaling within the canvas
       const imgAspect = 16 / 9;
       const canvasAspect = width / height;
 
       let drawWidth, drawHeight, offsetX, offsetY;
 
       if (canvasAspect > imgAspect) {
-        // Canvas is wider than 16:9
         drawHeight = height;
         drawWidth = height * imgAspect;
         offsetX = (width - drawWidth) / 2;
         offsetY = 0;
       } else {
-        // Canvas is narrower than 16:9
         drawWidth = width;
         drawHeight = width / imgAspect;
         offsetX = 0;
         offsetY = (height - drawHeight) / 2;
       }
 
+      // ── GPU OPTIMIZATION: Crisp edges draw ──
       ctx.fillStyle = "#050505";
       ctx.fillRect(0, 0, width, height);
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     }
 
-    /* ── 3. Map scroll position → frame index (Linear Interpolation) ── */
-    function onScroll() {
-      if (!ready) return;
+    /* ── 3. Refined rAF Scroll Sync (Prevention of Tearing/Blur) ── */
+    let ticking = false;
+    let latestScrollY = 0;
 
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    function updateAnimation() {
+      if (!ready) {
+        ticking = false;
+        return;
+      }
+
       const docHeight = document.documentElement.scrollHeight;
       const maxScroll = docHeight - window.innerHeight;
 
-      if (maxScroll <= 0) return;
+      if (maxScroll <= 0) {
+        ticking = false;
+        return;
+      }
 
-      const progress = Math.max(0, Math.min(1, scrollTop / maxScroll));
-
-      // Linear mapping with no smoothing/easing as requested
+      const progress = Math.max(0, Math.min(1, latestScrollY / maxScroll));
       const frameIndex = Math.floor(progress * (FRAME_COUNT - 1));
 
       if (frameIndex !== currentFrameIndex) {
         currentFrameIndex = frameIndex;
-        // Use requestAnimationFrame for smooth UI interaction
-        requestAnimationFrame(() => draw(frameIndex));
+        draw(frameIndex);
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      latestScrollY = window.scrollY || document.documentElement.scrollTop;
+
+      if (!ticking) {
+        window.requestAnimationFrame(updateAnimation);
+        ticking = true;
       }
     }
 
@@ -107,9 +119,8 @@ const CanvasSequence = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      // Re-apply smoothing after resize
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
+      // Ensure smoothing stays disabled after resize
+      ctx.imageSmoothingEnabled = false;
 
       if (ready) draw(currentFrameIndex);
     }
@@ -136,7 +147,11 @@ const CanvasSequence = () => {
         zIndex: 0,
         background: "#050505",
         overflow: "hidden",
-        pointerEvents: "none"
+        pointerEvents: "none",
+        // ── GPU OPTIMIZATION: Layer Promotion & Isolation ──
+        contain: "paint",
+        willChange: "transform",
+        transform: "translate3d(0,0,0)"
       }}
     >
       <canvas
@@ -145,8 +160,9 @@ const CanvasSequence = () => {
           display: "block",
           width: "100%",
           height: "100%",
-          // Technical requirements for high-fidelity and performance:
-          imageRendering: "-webkit-optimize-contrast",
+          // ── GPU OPTIMIZATION: Force Crisp Rendering ──
+          imageRendering: "pixelated",
+          WebkitFontSmoothing: "none",
           willChange: "transform",
           transform: "translate3d(0,0,0)",
           backfaceVisibility: "hidden"
