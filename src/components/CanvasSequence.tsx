@@ -11,7 +11,11 @@ const CanvasSequence = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    /* ── 1. Load all 240 images ── */
+    // Set high quality smoothing
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    /* ── 1. Load all 80 images ── */
     const images: HTMLImageElement[] = [];
     let loadedCount = 0;
     let ready = false;
@@ -19,6 +23,7 @@ const CanvasSequence = () => {
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
+      img.decoding = "sync"; // Force synchronous decoding to prevent blur
       img.src = `/sequence/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
       img.onload = () => {
         loadedCount++;
@@ -50,6 +55,7 @@ const CanvasSequence = () => {
       const h = img.naturalHeight * scale;
       const x = (canvas.width - w) / 2;
       const y = (canvas.height - h) / 2;
+
       ctx.drawImage(img, x, y, w, h);
     }
 
@@ -77,9 +83,14 @@ const CanvasSequence = () => {
 
     /* ── 4. Keep canvas sized to window ── */
     function resize() {
-      if (!canvas) return;
+      if (!canvas || !ctx) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      // Re-apply smoothing after resize as it can be reset
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+
       if (ready) draw(currentFrame);
     }
 
@@ -105,6 +116,9 @@ const CanvasSequence = () => {
         zIndex: 0,
         background: "#050505",
         display: "block",
+        imageRendering: "auto" as any, // "high-quality" is non-standard but requested
+        transform: "translateZ(0)", // Force hardware acceleration
+        backfaceVisibility: "hidden",
       }}
     />
   );
