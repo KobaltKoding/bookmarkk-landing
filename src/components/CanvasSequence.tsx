@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FRAME_COUNT = 80;
 
 const CanvasSequence = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const [opacity, setOpacity] = useState(0);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -100,6 +101,12 @@ const CanvasSequence = () => {
                 draw(frameIndex);
             }
 
+            // Fade in canvas after hero section
+            const heroEnd = window.innerHeight * 0.3;
+            const fadeRange = window.innerHeight * 0.5;
+            const fadeProgress = Math.max(0, Math.min(1, (latestScrollY - heroEnd) / fadeRange));
+            setOpacity(fadeProgress);
+
             ticking = false;
         }
 
@@ -148,7 +155,9 @@ const CanvasSequence = () => {
                 pointerEvents: "none",
                 contain: "paint",
                 willChange: "transform",
-                transform: "translate3d(0,0,0)"
+                transform: "translate3d(0,0,0)",
+                opacity: opacity,
+                transition: "opacity 0.15s ease-out"
             }}
         >
             <canvas

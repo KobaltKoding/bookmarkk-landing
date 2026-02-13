@@ -6,7 +6,7 @@ import LeaderboardScreen from "./hero-screens/LeaderboardScreen";
 import QuizScreen from "./hero-screens/QuizScreen";
 import ProfileScreen from "./hero-screens/ProfileScreen";
 
-export default function Hero() {
+export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   // Auto-rotate
@@ -61,8 +61,8 @@ export default function Hero() {
           </p>
 
           {/* CTA */}
-          <a
-            href="#join"
+          <button
+            onClick={onJoinClick}
             className="gradient-btn inline-flex items-center gap-2 px-10 py-5 rounded-full text-xl font-bold text-white transition-all hover:scale-105 shadow-2xl hover:shadow-primary/50"
           >
             Join Waitlist
@@ -79,7 +79,7 @@ export default function Hero() {
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </svg>
-          </a>
+          </button>
         </motion.div>
 
         {/* Phone carousel */}
@@ -137,7 +137,7 @@ export default function Hero() {
                 onDragEnd={onDragEnd}
                 className="absolute top-0 w-64 md:w-80 origin-bottom cursor-grab active:cursor-grabbing"
               >
-                <div className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-[2.5rem] p-3 glow-purple">
+                <div className="backdrop-blur-md bg-black/80 border border-white/[0.08] rounded-[2.5rem] p-3 glow-purple">
                   <div className="bg-background rounded-[2rem] overflow-hidden h-[540px] relative pointer-events-none select-none">
                     {/* Status bar */}
                     <div className="flex items-center justify-between px-6 py-3 text-xs text-secondary absolute top-0 left-0 right-0 z-10">

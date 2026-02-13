@@ -88,7 +88,7 @@ export default function HowItWorks() {
             return;
         }
 
-        const CYCLE_DURATION = 3000; // 3 seconds per slide
+        const CYCLE_DURATION = 2000; // 2 seconds per slide (faster)
         const UPDATE_FREQ = 50;
         let elapsed = 0;
 
@@ -129,7 +129,7 @@ export default function HowItWorks() {
                         How It Works
                     </p>
                     <h2 className="text-4xl md:text-6xl font-bold mb-6 text-text-primary">
-                        Read. Prove it. <span className="text-yellow-400 font-serif italic pr-1">Level up.</span>
+                        Read it. Prove it. <span className="text-yellow-400 font-serif italic pr-1">Level up.</span>
                     </h2>
                     <p className="text-text-secondary text-lg max-w-xl mx-auto">
                         Three steps. One loop. A reading habit that builds itself.
@@ -182,13 +182,13 @@ export default function HowItWorks() {
                                         boxShadow: styles.shadow
                                     }}
                                     transition={{ duration: 0.4, delay: i * 0.1 }}
-                                    className="w-[300px] h-[320px] backdrop-blur-md bg-black/40 border border-white/[0.08] p-6 rounded-3xl flex flex-col items-center justify-center text-center relative overflow-hidden group hover:scale-105 transition-transform duration-300"
+                                    className="w-[300px] h-[320px] backdrop-blur-md bg-black/80 border border-white/[0.08] p-6 rounded-3xl flex flex-col items-center justify-center text-center relative overflow-hidden group hover:scale-105 transition-transform duration-300"
                                 >
                                     <div className={`w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 transition-all duration-500 z-10 ${styles.iconBg} ${styles.iconColor} shadow-[0_0_20px_rgba(255,255,255,0.05)]`}>
                                         {step.icon}
                                     </div>
                                     <h3 className={`text-xl font-bold mb-2 transition-colors z-10 ${styles.titleColor}`}>{step.label}</h3>
-                                    <p className="text-sm text-text-muted leading-relaxed z-10">{step.description}</p>
+                                    <p className="text-sm text-white/70 leading-relaxed z-10">{step.description}</p>
                                 </motion.div>
 
                                 {i < systemSteps.length - 1 && (
@@ -241,13 +241,13 @@ export default function HowItWorks() {
                                             y: 0,
                                             borderColor: styles.border,
                                         }}
-                                        className="w-full backdrop-blur-md bg-black/40 border border-white/[0.08] p-6 rounded-2xl flex flex-col items-center text-center"
+                                        className="w-full backdrop-blur-md bg-black/80 border border-white/[0.08] p-6 rounded-2xl flex flex-col items-center text-center"
                                     >
                                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 ${styles.iconBg} ${styles.iconColor}`}>
                                             {step.icon}
                                         </div>
                                         <h3 className={`text-lg font-bold mb-1 ${styles.titleColor}`}>{step.label}</h3>
-                                        <p className="text-sm text-text-muted">{step.description}</p>
+                                        <p className="text-sm text-white/70">{step.description}</p>
                                     </motion.div>
                                     {i < systemSteps.length - 1 && (
                                         <motion.span
@@ -272,7 +272,7 @@ export default function HowItWorks() {
                         animate={inView ? { opacity: 1 } : {}}
                         className="text-center mb-12"
                     >
-                        <p className="text-sm uppercase tracking-widest text-text-muted font-bold opacity-60">
+                        <p className="text-sm uppercase tracking-widest text-white/80 font-bold">
                             Watch Your Profile Grow
                         </p>
                     </motion.div>
@@ -280,7 +280,7 @@ export default function HowItWorks() {
                     <div className="flex justify-center">
                         {/* The Single Transforming Card */}
                         <motion.div
-                            className={`relative w-full max-w-sm aspect-[4/5] md:aspect-[3/4] backdrop-blur-xl bg-black/40 border border-white/[0.08] rounded-3xl p-8 transition-all duration-700 flex flex-col items-center justify-between ${stage.borderColor} ${stage.color} ${stage.glowColor} cursor-pointer`}
+                            className={`relative w-full max-w-sm aspect-[4/5] md:aspect-[3/4] backdrop-blur-xl bg-black/80 border border-white/[0.08] rounded-3xl p-8 transition-all duration-700 flex flex-col items-center justify-between ${stage.borderColor} ${stage.color} ${stage.glowColor} cursor-pointer`}
                             layout
                             onClick={() => {
                                 if (isPaused) setIsPaused(false);

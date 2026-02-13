@@ -47,7 +47,7 @@ const questions = [
   },
 ];
 
-export default function InteractiveQuiz() {
+export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -115,7 +115,7 @@ export default function InteractiveQuiz() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-2xl overflow-hidden glow-purple"
+          className="backdrop-blur-md bg-black/80 border border-white/[0.08] rounded-2xl overflow-hidden glow-purple"
         >
           {/* Quiz header */}
           <div className="border-b border-white/5 px-6 py-4 flex items-center justify-between">
@@ -228,12 +228,12 @@ export default function InteractiveQuiz() {
                     >
                       Try Again
                     </button>
-                    <a
-                      href="#join"
+                    <button
+                      onClick={onJoinClick}
                       className="gradient-btn px-5 py-2.5 rounded-full text-sm font-semibold text-white"
                     >
                       Join Waitlist
-                    </a>
+                    </button>
                   </div>
                 </motion.div>
               ) : (

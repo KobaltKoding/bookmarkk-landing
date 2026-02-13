@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export default function FinalCTA() {
+export default function FinalCTA({ onJoinClick }: { onJoinClick?: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -14,7 +14,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-3xl p-12 text-center relative overflow-hidden"
+          className="backdrop-blur-md bg-black/80 border border-white/[0.08] rounded-3xl p-12 text-center relative overflow-hidden"
         >
           {/* Background glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent-purple/10 rounded-full blur-[120px] pointer-events-none" />
@@ -30,12 +30,12 @@ export default function FinalCTA() {
               Join the waitlist to secure your spot in the next cohort.
             </p>
 
-            <a
-              href="#"
+            <button
+              onClick={onJoinClick}
               className="gradient-btn px-8 py-4 rounded-full text-lg font-bold text-white transition-all hover:scale-105 shadow-xl hover:shadow-primary/25"
             >
               Join Waitlist
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>

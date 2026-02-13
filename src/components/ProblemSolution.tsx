@@ -95,7 +95,7 @@ export default function ProblemSolution() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.3 }} // Staggered entrance
-                    className={`backdrop-blur-md bg-black/40 border border-white/[0.08] rounded-xl p-5 relative overflow-hidden transition-all duration-700 border ${book.borderColor} ${book.shadow}`}
+                    className={`backdrop-blur-md bg-black/80 border border-white/[0.08] rounded-xl p-5 relative overflow-hidden transition-all duration-700 border ${book.borderColor} ${book.shadow}`}
                     style={{
                       opacity: inView ? book.opacity : 0,
                       filter: inView ? `${book.blur} ${book.grayscale}` : "none",
