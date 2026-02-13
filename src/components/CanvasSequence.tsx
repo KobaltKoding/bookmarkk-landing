@@ -16,6 +16,7 @@ const CanvasSequence = () => {
         if (!ctx) return;
 
         ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
 
         /* ── 1. Load all 80 images ── */
         const images: HTMLImageElement[] = [];
@@ -120,6 +121,7 @@ const CanvasSequence = () => {
             canvas.height = window.innerHeight;
 
             ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
 
             if (ready) draw(currentFrameIndex);
         }
