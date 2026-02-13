@@ -1,14 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Core palette — Amber Gold for Cinematic Glow */
-  --primary: #F59E0B;
-  --primary-hover: #D97706;
-  --primary-light: rgba(245, 158, 11, 0.15);
-  --accent: #10B981;
-  --accent-hover: #059669;
-  --accent-amber: #FBBF24;
-  /* Brighter gold */
+  /* Core palette — Electric Indigo/Cyan for High Contrast */
+  --primary: #7C3AED;
+  --primary-hover: #6D28D9;
+  --primary-light: rgba(124, 58, 237, 0.15);
+  --accent: #06B6D4;
+  --accent-hover: #0891B2;
+  --accent-amber: #A78BFA;
+
+  #overview,
+  #how-it-works,
+  #features,
+  #community {
+    scroll-margin-top: 100px;
+  }
+
+  /* Soft Violet */
   --electric-blue: #60A5FA;
 
   /* Text */
@@ -24,15 +32,28 @@
   --bg-card-border: rgba(255, 255, 255, 0.08);
   --bg-dark: #030303;
 
-  /* Typography */
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Typography - Apple-Style Tight Tracking */
+  --font-main: 'Inter',
+  system-ui,
+  -apple-system,
+  sans-serif;
+  --tracking-tight: -0.022em;
+  --tracking-tighter: -0.04em;
 
-  /* Shadows */
+  /* Shadows - Layered and Soft */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-  --shadow-glow: 0 0 120px -40px rgba(245, 158, 11, 0.2);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4),
+  0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4),
+  0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5),
+  0 8px 10px -6px rgb(0 0 0 / 0.4);
+  --shadow-glow: 0 0 120px -40px rgba(124, 58, 237, 0.3);
+
+  /* Glassmorphism - Triple Layer */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 24px;
 }
 
 * {
@@ -49,7 +70,9 @@ body {
   background-color: var(--bg-page);
   color: var(--text-main);
   font-family: var(--font-main);
-  line-height: 1.6;
+  line-height: 1.45;
+  /* Apple-style compressed line height */
+  letter-spacing: var(--tracking-tight);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -81,9 +104,9 @@ h5,
 h6 {
   font-family: var(--font-main);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--tracking-tighter);
   color: var(--text-main);
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 button {
@@ -192,10 +215,10 @@ input {
 }
 
 .navbar--scrolled {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   height: 64px;
 }
 
@@ -372,14 +395,21 @@ input {
 
 /* Glassmorphic card (AI Quiz card, etc.) */
 .glass-card {
-  margin-top: 1rem;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
-  backdrop-filter: blur(4px);
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
   max-width: 28rem;
   pointer-events: auto;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .glass-card .indicator {
@@ -512,35 +542,42 @@ input {
 
 /* ===== DIFFERENTIATION SECTION ===== */
 .diff-card {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: 2rem;
-  border-radius: 1.5rem;
-  border: 1px solid var(--bg-card-border);
-  box-shadow: var(--shadow-glow);
+  background: #0A0A0C;
+  /* Solid background for legibility */
+  padding: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-xl);
   max-width: 48rem;
   margin: 0 auto;
   pointer-events: auto;
+  overflow: hidden;
 }
 
 .diff-card .comparison-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .diff-card .comparison-header span:first-child {
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .diff-card .comparison-header span:last-child {
-  font-weight: 800;
+  font-weight: 700;
   color: var(--primary);
   text-align: center;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .diff-card .comparison-row {
@@ -548,7 +585,7 @@ input {
   grid-template-columns: 1fr 1fr;
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .diff-card .comparison-row:last-child {
@@ -556,20 +593,20 @@ input {
 }
 
 .diff-card .comparison-row:hover {
-  background: rgba(245, 158, 11, 0.05);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .diff-card .other {
   color: var(--text-muted);
   text-align: center;
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .diff-card .ours {
   font-weight: 600;
   color: var(--text-main);
   text-align: center;
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 /* ===== FINAL CTA ===== */

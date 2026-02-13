@@ -9,14 +9,20 @@ const comparisons = [
 
 const Differentiation = () => {
   return (
-    <div className="diff-card">
+    <motion.div
+      className="diff-card"
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
+    >
       <h2 style={{
-        fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+        fontSize: 'clamp(1.5rem, 3vw, 2rem)',
         fontWeight: 700,
         color: 'white',
         textAlign: 'center',
-        padding: '1.5rem 1.5rem 0',
-        marginBottom: '0.5rem',
+        padding: '2.5rem 1.5rem 1rem',
+        marginBottom: '0',
       }}>
         Why Bookmarkk ≠ Other Apps
       </h2>
@@ -33,13 +39,13 @@ const Differentiation = () => {
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: index * 0.1 }}
+          transition={{ delay: 0.2 + index * 0.1 }}
         >
           <div className="other">{row.other}</div>
           <div className="ours">{row.us}</div>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,49 +1,80 @@
+import { motion } from 'framer-motion';
+
 const stats = [
   {
     value: '88%',
-    label: 'now reading 2+ days/week',
-    sub: '(up from 25%)',
+    label: 'more active',
+    description: 'Reading at least 2 days a week, up from just 25% in beta.',
     color: 'var(--primary)',
+    span: 2
   },
   {
     value: '30%',
-    label: 'reading 5+ days/week',
-    sub: '(up from 8%)',
-    color: 'var(--accent-amber)',
+    label: 'super readers',
+    description: 'Crushing 5+ days/week.',
+    color: 'var(--accent)',
+    span: 1
   },
   {
     value: '100%',
-    label: 'told someone about it',
-    sub: '',
+    label: 'referral rate',
+    description: 'Every beta user shared bookmarkk with a friend.',
     color: 'rgba(255,255,255,0.9)',
+    span: 1
   },
   {
-    value: '91%',
-    label: 'would recommend',
-    sub: '',
+    value: '9.4',
+    label: 'CSAT',
+    description: 'Verified comprehension builds deep user trust.',
     color: 'rgba(255,255,255,0.9)',
+    span: 2
   },
 ];
 
 const SocialProof = () => {
   return (
     <div className="retention-card">
-      <h2>The retention loop that works.</h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        The retention loop that works.
+      </motion.h2>
 
       <div className="retention-grid">
         {stats.map((stat, index) => (
-          <div key={index} className="retention-item">
-            <h3 style={{ color: stat.color }}>
-              {stat.value} {stat.label}
+          <motion.div
+            key={index}
+            className="retention-item glass-card"
+            style={{
+              marginTop: 0,
+              gridColumn: window.innerWidth > 768 ? `span ${stat.span}` : 'span 1'
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.6 }}
+            whileHover={{ scale: 1.01 }}
+          >
+            <h3 style={{ color: stat.color, fontSize: '2.5rem', marginBottom: '0.25rem' }}>
+              {stat.value}
             </h3>
-            <p>
-              {stat.sub
-                ? `${stat.sub} — Verified through AI-powered comprehension quizzes and weekly league participation.`
-                : index === 2
-                  ? 'Every single beta user shared bookmarkk with someone. Organic word of mouth built on real results.'
-                  : 'Net promoter score through the roof. Readers who prove their progress become lifelong advocates.'}
+            <div style={{
+              textTransform: 'uppercase',
+              fontSize: '0.75rem',
+              letterSpacing: '0.1em',
+              fontWeight: 700,
+              color: 'var(--text-muted)',
+              marginBottom: '1rem'
+            }}>
+              {stat.label}
+            </div>
+            <p style={{ fontSize: '0.9375rem', lineHeight: 1.5 }}>
+              {stat.description}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

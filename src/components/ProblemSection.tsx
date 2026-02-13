@@ -1,12 +1,31 @@
+import { motion } from 'framer-motion';
+
 const ProblemSection = () => {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <h2 className="section-heading-large">
+    <motion.div
+      style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={{
+        visible: { transition: { staggerChildren: 0.1 } }
+      }}
+    >
+      <motion.h2 className="section-heading-large" variants={itemVariants}>
         Progress you can{' '}
         <span className="highlight-amber">prove.</span>
-      </h2>
+      </motion.h2>
 
-      <div className="section-body-text">
+      <motion.div className="section-body-text" variants={itemVariants}>
         <p>
           70% of people want to read more. Most fail because progress is invisible.
         </p>
@@ -19,9 +38,9 @@ const ProblemSection = () => {
           Reading is the only self-improvement habit with no scoreboard—
           <strong style={{ color: 'rgba(255,255,255,0.9)' }}>bookmarkk fixes this.</strong>
         </p>
-      </div>
+      </motion.div>
 
-      <div className="glass-card">
+      <motion.div className="glass-card" variants={itemVariants}>
         <div className="indicator">
           <div className="pulse-dot" />
           <span className="indicator-text">AI Quiz · Chapter 3</span>
@@ -29,8 +48,8 @@ const ProblemSection = () => {
         <p className="quote">
           "What was the core argument the author made about habit formation?"
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
