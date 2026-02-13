@@ -167,6 +167,11 @@ input {
   height: 20vh;
 }
 
+/* Aspect Ratio Utilities */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
 /* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
