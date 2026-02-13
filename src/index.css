@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Core palette — matched to reference */
-  --primary: #6366F1;
-  --primary-hover: #5558E6;
-  --primary-light: rgba(99, 102, 241, 0.15);
+  /* Core palette — Amber Gold for Cinematic Glow */
+  --primary: #F59E0B;
+  --primary-hover: #D97706;
+  --primary-light: rgba(245, 158, 11, 0.15);
   --accent: #10B981;
   --accent-hover: #059669;
-  --accent-amber: #F59E0B;
+  --accent-amber: #FBBF24;
+  /* Brighter gold */
   --electric-blue: #60A5FA;
 
   /* Text */
@@ -31,7 +32,7 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-  --shadow-glow: 0 0 120px -40px rgba(99, 102, 241, 0.15);
+  --shadow-glow: 0 0 120px -40px rgba(245, 158, 11, 0.2);
 }
 
 * {
@@ -72,7 +73,12 @@ body {
   background: #555;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-main);
   font-weight: 700;
   letter-spacing: -0.025em;
@@ -149,9 +155,17 @@ input {
 }
 
 /* ===== SPACERS ===== */
-.spacer-60 { height: 60vh; }
-.spacer-40 { height: 40vh; }
-.spacer-20 { height: 20vh; }
+.spacer-60 {
+  height: 60vh;
+}
+
+.spacer-40 {
+  height: 40vh;
+}
+
+.spacer-20 {
+  height: 20vh;
+}
 
 /* ===== NAVBAR ===== */
 .navbar {
@@ -264,7 +278,7 @@ input {
 }
 
 .btn-nav-cta:hover {
-  border-color: rgba(99, 102, 241, 0.5);
+  border-color: rgba(245, 158, 11, 0.5);
 }
 
 .btn-nav-cta .btn-glow {
@@ -298,7 +312,7 @@ input {
   font-weight: 700;
   letter-spacing: -0.04em;
   color: white;
-  filter: drop-shadow(0 0 80px rgba(99, 102, 241, 0.25));
+  filter: drop-shadow(0 0 80px rgba(245, 158, 11, 0.25));
   line-height: 1;
   margin-bottom: 1.5rem;
 }
@@ -379,8 +393,15 @@ input {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .glass-card .indicator-text {
@@ -530,7 +551,7 @@ input {
 }
 
 .diff-card .comparison-row:hover {
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(245, 158, 11, 0.05);
 }
 
 .diff-card .other {

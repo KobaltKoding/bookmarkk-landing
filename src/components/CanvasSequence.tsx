@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const FRAME_COUNT = 240;
+const FRAME_COUNT = 80;
 
 const CanvasSequence = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
