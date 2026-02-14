@@ -53,16 +53,23 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
   const [answered, setAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(58);
+  const [timeLeft, setTimeLeft] = useState(30);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (started && !finished && timeLeft > 0) {
-      const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-      return () => clearInterval(timer);
-    } else if (started && !finished && timeLeft === 0) {
-      setFinished(true);
+      timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            setFinished(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     }
-  }, [started, finished, timeLeft]);
+    return () => clearInterval(timer);
+  }, [started, finished]);
 
   const handleSelect = (index: number) => {
     if (answered) return;
@@ -95,7 +102,7 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
     setAnswered(false);
     setScore(0);
     setFinished(false);
-    setTimeLeft(58);
+    setTimeLeft(30);
   };
 
   const q = questions[currentQuestion];
@@ -132,17 +139,38 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
               <X className="w-6 h-6 text-[#1a1a1a] stroke-[2.5]" />
             </button>
 
-            <div className="flex-1 h-2.5 bg-[#1a1a1a] rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-[#404040] rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                transition={{ duration: 0.5 }}
-              />
+            <div className="flex-1 flex flex-col gap-2">
+              <div className="h-2.5 bg-[#1a1a1a] rounded-full overflow-hidden relative">
+                <motion.div
+                  className="h-full bg-[#404040] rounded-full origin-left"
+                  initial={{ width: "100%" }}
+                  animate={{
+                    width: started && !finished ? `${(timeLeft / 30) * 100}%` : "100%",
+                    backgroundColor: timeLeft < 10 && started ? "#ef4444" : "#404040"
+                  }}
+                  transition={{
+                    width: { duration: started && !finished ? 1 : 0.3, ease: "linear" },
+                    backgroundColor: { duration: 0.3 }
+                  }}
+                />
+              </div>
+              {/* Question Dots */}
+              <div className="flex gap-1.5 px-0.5">
+                {questions.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1 flex-1 rounded-full transition-all duration-300 ${i < currentQuestion ? "bg-[#404040]" :
+                      i === currentQuestion ? "bg-white/40" : "bg-white/5"
+                      }`}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="bg-[#1a1a1a] px-3 py-1.5 rounded-md">
-              <span className="text-sm font-bold text-[#808080]">{timeLeft}s</span>
+            <div className="bg-[#1a1a1a] px-3 py-1.5 rounded-md min-w-[50px] text-center">
+              <span className={`text-sm font-black tabular-nums transition-colors ${timeLeft < 10 ? "text-red-500" : "text-[#808080]"}`}>
+                {timeLeft}s
+              </span>
             </div>
           </div>
 
