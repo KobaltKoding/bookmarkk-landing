@@ -1,40 +1,26 @@
-import { motion } from 'framer-motion';
+"use client";
 
-interface FinalCTAProps {
-  onJoinClick: () => void;
-}
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-const FinalCTA = ({ onJoinClick }: FinalCTAProps) => {
+export default function FinalCTA({ onJoinClick }: { onJoinClick?: () => void }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section className="final-cta">
-      <div className="container">
+    <section className="py-24 px-6" ref={ref} id="join">
+      {/* 
+      <div className="max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="backdrop-blur-md bg-black/80 border border-white/[0.08] rounded-3xl p-12 text-center relative overflow-hidden"
         >
-          <h2>Season 1 starts soon</h2>
-          <p className="subtitle">
-            Join the waitlist for early access + founding member perks.
-          </p>
-
-          <div style={{ maxWidth: '440px', margin: '0 auto' }}>
-            <button
-              className="btn-primary large"
-              onClick={onJoinClick}
-              style={{ width: '100%' }}
-            >
-              Join Season 1
-            </button>
-            <p className="fine-print">
-              Limited spots. We're starting with a small cohort to iterate fast.
-            </p>
-          </div>
+          {/ * ... content was here ... * /}
         </motion.div>
       </div>
+      */}
     </section>
   );
-};
-
-export default FinalCTA;
+}
