@@ -36,17 +36,17 @@ export default function ProblemSolution() {
       <div className="absolute inset-0 bg-white/10 backdrop-blur-sm -z-10" />
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="space-y-4"
+          className="backdrop-blur-md bg-white/10 p-8 md:p-12 rounded-3xl border border-white/20 shadow-xl space-y-6 max-w-3xl no-scrollbar overflow-hidden"
         >
-          <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-[#1D59BB] leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-[#1D59BB] leading-[1.1]">
             Your bookshelf is a <br className="hidden md:block" />
-            graveyard of good intentions
+            graveyard of <span className="text-[#75BAFF] font-serif italic">intentions.</span>
           </h2>
-          <p className="text-xl font-bold text-[#1D59BB] opacity-80">
-            You don’t need motivation. You need a system.
+          <p className="text-lg md:text-xl text-[#1D59BB]/80 leading-relaxed font-medium">
+            You don’t need motivation. You need a system. Bookmarkk is the system for reading mastery.
           </p>
         </motion.div>
 

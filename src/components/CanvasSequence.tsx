@@ -7,7 +7,7 @@ const FRAME_COUNT = 117; // 40 + 77 frames
 const CanvasSequence = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [opacity, setOpacity] = useState(0.5);
+    const [opacity, setOpacity] = useState(0.4);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -190,7 +190,7 @@ const CanvasSequence = () => {
             // Opacity: User requested "background video is too bright. Reduce transparency".
             // We'll set global alpha in draw, or just opacity of container.
             // Let's drop container opacity to 0.4 as a baseline for "translucent" look.
-            setOpacity(0.15);
+            setOpacity(0.4);
 
             draw(0, progress);
 

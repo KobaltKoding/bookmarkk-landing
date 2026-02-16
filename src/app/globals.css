@@ -16,8 +16,9 @@
   /* Sky Blue */
   --color-text-muted: #75BAFFcc;
   /* Muted Sky Blue */
-  --font-sans: var(--font-geist-sans);
-  --font-serif: var(--font-playfair);
+  /* Geometric Sans-Serif Stack (Futura) */
+  --font-sans: "Futura", "Futura-Medium", "Futura Medium", var(--font-outfit), system-ui, sans-serif;
+  --font-serif: "Futura", "Futura-Bold", "Futura-Medium", var(--font-outfit), system-ui, sans-serif;
 }
 
 body {
@@ -34,8 +35,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-serif), serif;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-weight: 900;
   color: var(--color-text-primary);
 }
 
@@ -75,6 +76,19 @@ h6 {
 /* Glow effect */
 .glow-purple {
   box-shadow: 0 0 60px rgba(124, 58, 237, 0.1);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Animate in from bottom */
