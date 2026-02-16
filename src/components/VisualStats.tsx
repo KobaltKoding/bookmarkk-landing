@@ -64,34 +64,41 @@ export default function VisualStats() {
                     initial={{ opacity: 0, x: -50 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="order-2 lg:order-1 flex justify-center lg:justify-start overflow-visible"
+                    className="order-2 lg:order-1 flex justify-center lg:justify-start"
                 >
-                    <div className="scale-[0.9] origin-center lg:origin-left min-w-[500px]">
-                        <img
-                            src="/assets/Screenshots/lebron_meme.jpg"
-                            alt="Test Image"
-                            className="w-full h-auto rounded-[3.5rem] shadow-3xl"
-                        />
+                    <div className="w-64 md:w-80 h-auto">
+                        <div className="backdrop-blur-md bg-black/80 border border-[#1D59BB]/10 rounded-[3.5rem] p-3 shadow-2xl">
+                            <div className="bg-background rounded-[3rem] overflow-hidden h-[600px] relative pointer-events-none select-none">
+                                <div className="h-full overflow-hidden">
+                                    <img
+                                        src="/assets/Screenshots/leaderboard_page.png"
+                                        alt="Leaderboard Rankings"
+                                        className="w-full h-full object-cover [image-rendering:optimize-contrast] rounded-[3rem] scale-x-110"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
 
                 {/* Right: Copy + Original Stats */}
-                <div className="order-1 lg:order-2 space-y-10">
+                <div className="order-1 lg:order-2 space-y-12">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8 }}
-                        className="space-y-6"
+                        className="backdrop-blur-md bg-white/10 p-8 md:p-12 rounded-3xl border border-white/20 shadow-xl space-y-6 no-scrollbar overflow-hidden"
                     >
-                        <h3 className="text-5xl md:text-6xl font-black leading-tight tracking-tighter text-[#1D59BB]">
-                            Reading is a <span className="text-[#75BAFF] italic font-serif">Sport.</span>
-                        </h3>
-                        <p className="text-xl md:text-2xl font-medium text-[#1D59BB]/70 leading-relaxed max-w-xl">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter text-[#1D59BB]">
+                            Reading is a <br />
+                            <span className="text-[#75BAFF] font-serif italic">Sport.</span>
+                        </h2>
+                        <p className="text-lg md:text-xl text-[#1D59BB]/80 leading-relaxed font-medium">
                             Join clubs, earn limited-edition badges, and witness your growth on the global stage. Competition breeds consistency.
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
                         {/* Stat 1: Retention */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}

@@ -299,7 +299,7 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
           <p className="text-sm uppercase tracking-widest text-[#75BAFF] mb-3 font-mono font-bold">
             Interactive Preview
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1D59BB]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1D59BB] tracking-tighter leading-[1.1]">
             Try the Experience
           </h2>
         </motion.div>
