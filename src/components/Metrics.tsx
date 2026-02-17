@@ -43,8 +43,8 @@ export default function Metrics() {
             Build a reading habit that sticks
           </h2>
           <p className="text-xl text-[#75BAFF] max-w-2xl mx-auto leading-relaxed font-medium">
-            Most reading apps track what you <em>want</em> to read. <br />
-            Bookmarkk tracks what you <em>actually</em> read.
+            Most reading apps track what you <strong className="font-bold">want</strong> to read. <br />
+            Bookmarkk tracks what you <strong className="font-bold">actually</strong> read.
           </p>
         </motion.div>
 
@@ -94,7 +94,7 @@ export default function Metrics() {
           </div>
 
           <div className="mt-10 pt-8 border-t border-[#1D59BB]/10 text-center">
-            <p className="text-[#75BAFF] italic font-medium">
+            <p className="text-[#75BAFF] font-medium">
               "I went from reading 3 books a year to 3 books a month."
             </p>
           </div>

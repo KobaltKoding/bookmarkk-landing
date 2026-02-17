@@ -20,13 +20,13 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#FEF3B3] border-b border-[#1D59BB]/10`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       style={{ scale: navScale }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="relative h-16 flex items-center overflow-hidden">
           <img
@@ -54,7 +54,7 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
         {/* CTA */}
         <motion.button
           onClick={onJoinClick}
-          className="gradient-btn px-6 py-2.5 rounded-full text-sm font-semibold text-white relative overflow-hidden"
+          className="bg-[#1D59BB] px-6 py-2.5 rounded-full text-sm font-semibold text-white shadow-lg transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
         >

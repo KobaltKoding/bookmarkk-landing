@@ -79,14 +79,13 @@ export default function HowItWorks() {
     };
 
     return (
-        <section className="py-24 px-6 overflow-hidden relative" ref={ref} id="how-it-works">
-            <div className="absolute inset-0 bg-transparent -z-10" />
+        <section className="py-24 px-6 overflow-hidden relative bg-[#FEF3B3]" ref={ref} id="how-it-works">
             <div className="max-w-7xl mx-auto">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 lg:items-end items-center">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
                     {/* Left: Phone Carousel */}
                     <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-                        <div className="relative h-[750px] w-full max-w-[500px] flex items-center justify-center">
+                        <div className="relative h-[600px] w-full max-w-[500px] flex items-center justify-center">
                             {growthStages.map((stage, index) => {
                                 const position = (index - currentScreen + growthStages.length) % growthStages.length;
                                 let variants = {};
@@ -110,9 +109,9 @@ export default function HowItWorks() {
                                         dragElastic={0.05}
                                         onDragEnd={onDragEnd}
                                         onClick={() => setIsPaused(!isPaused)}
-                                        className="absolute bottom-0 w-64 md:w-80 origin-bottom cursor-grab active:cursor-grabbing"
+                                        className="absolute w-64 md:w-80 cursor-grab active:cursor-grabbing"
                                     >
-                                        <div className={`backdrop-blur-md bg-black/80 border ${stage.borderColor} rounded-[3.5rem] p-3 shadow-2xl`}>
+                                        <div className={`backdrop-blur-md bg-black rounded-[3.5rem] p-3 shadow-2xl border ${stage.borderColor}`}>
                                             <div className="bg-background rounded-[3rem] overflow-hidden h-[600px] relative pointer-events-none select-none">
                                                 <div className="h-full overflow-hidden">
                                                     <img
@@ -135,7 +134,7 @@ export default function HowItWorks() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={inView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8 }}
-                            className="backdrop-blur-md bg-white/10 p-8 md:p-12 rounded-3xl border border-white/20 shadow-xl space-y-6 no-scrollbar overflow-hidden"
+                            className="space-y-6 no-scrollbar overflow-hidden"
                         >
                             <p className="text-sm uppercase tracking-wider text-[#75BAFF] mb-4 font-mono font-bold">
                                 How It Works
@@ -143,7 +142,7 @@ export default function HowItWorks() {
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#1D59BB] leading-[1.1] tracking-tighter">
                                 Read it. <br />
                                 Prove it. <br />
-                                <span className="text-[#75BAFF] font-serif italic">Level up.</span>
+                                <span className="text-[#75BAFF]">Level up.</span>
                             </h2>
                             <p className="text-[#1D59BB]/80 text-lg md:text-xl font-medium leading-relaxed">
                                 Three steps. One loop. A reading habit that builds itself. Bookmarkk turns every chapter into proof of progress.
