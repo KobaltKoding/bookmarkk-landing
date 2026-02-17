@@ -1,24 +1,34 @@
+"use client";
+
 interface FooterProps {
-  onOpenLegal: (tab: 'privacy' | 'terms') => void;
+  onOpenLegal?: (tab: "privacy" | "terms") => void;
 }
 
-const Footer = ({ onOpenLegal }: FooterProps) => {
+export default function Footer({ onOpenLegal }: FooterProps) {
   return (
-    <footer className="footer">
-      <div className="container footer-content">
-        <div className="footer-brand">bookmarkk</div>
-
-        <div className="footer-links">
-          <button onClick={() => onOpenLegal('privacy')}>Privacy Policy</button>
-          <button onClick={() => onOpenLegal('terms')}>Terms of Service</button>
+    <footer className="relative z-20 border-t border-white/5 py-8 px-6 bg-[#030303]">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <span className="font-bold text-sm">bookmarkk</span>
+          <span className="text-xs text-text-muted">
+            &copy; {new Date().getFullYear()} Bookmarkk. All rights reserved.
+          </span>
         </div>
-
-        <div className="footer-copyright">
-          &copy; {new Date().getFullYear()} bookmarkk. All rights reserved.
+        <div className="flex items-center gap-6 text-xs text-text-muted">
+          <button
+            onClick={() => onOpenLegal?.("privacy")}
+            className="hover:text-white transition-colors"
+          >
+            Privacy Policy
+          </button>
+          <button
+            onClick={() => onOpenLegal?.("terms")}
+            className="hover:text-white transition-colors"
+          >
+            Terms of Service
+          </button>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
