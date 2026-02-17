@@ -1,192 +1,133 @@
 "use client";
 
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import LeaderboardScreen from "./hero-screens/LeaderboardScreen";
-import QuizScreen from "./hero-screens/QuizScreen";
-import ProfileScreen from "./hero-screens/ProfileScreen";
 
-const growthStages = [
+const screenshots = [
     {
-        day: "Step 1",
-        label: "The Quiz Flow",
-        xp: 120,
-        streak: 3,
-        level: 1,
-        ringProgress: 25,
-        color: "bg-primary/5",
-        textColor: "text-primary",
-        ringColor: "stroke-primary",
-        glowColor: "shadow-[0_0_30px_-10px_rgba(192,87,70,0.2)]",
-        borderColor: "border-primary/30",
-        Component: QuizScreen,
-        image: "/assets/Screenshots/home_page.png",
+        label: "Track Your Stats",
+        image: "/assets/Screenshots/stats.png",
     },
     {
-        day: "Step 2",
-        label: "Climbing the Ranks",
-        xp: 340,
-        streak: 7,
-        level: 2,
-        ringProgress: 60,
-        color: "bg-success/5",
-        textColor: "text-success",
-        ringColor: "stroke-success",
-        glowColor: "shadow-[0_0_30px_-10px_rgba(46,125,50,0.2)]",
-        borderColor: "border-success/30",
-        Component: LeaderboardScreen,
-        image: "/assets/Screenshots/quiz_page.png",
+        label: "Your Book Collection",
+        image: "/assets/Screenshots/book .png",
     },
     {
-        day: "Step 3",
-        label: "A Reader's Profile",
-        xp: 720,
-        streak: 14,
-        level: 3,
-        ringProgress: 84,
-        color: "bg-primary/10",
-        textColor: "text-primary",
-        ringColor: "stroke-primary",
-        glowColor: "shadow-[0_0_50px_-10px_rgba(192,87,70,0.3)]",
-        borderColor: "border-primary/30",
-        Component: ProfileScreen,
-        image: "/assets/Screenshots/streak_page.png",
+        label: "Test Your Knowledge",
+        image: "/assets/Screenshots/quiz.png",
     },
 ];
 
 export default function HowItWorks() {
     const ref = useRef(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
-    const [currentScreen, setCurrentScreen] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
+    const [focusedIndex, setFocusedIndex] = useState(1); // Start with middle image focused
 
-    // Auto-rotate screens
+    // Auto-rotate every 2 seconds
     useEffect(() => {
-        if (!inView || isPaused) return;
+        if (!inView) return;
         const interval = setInterval(() => {
-            setCurrentScreen((prev) => (prev + 1) % growthStages.length);
-        }, 1500);
+            setFocusedIndex((prev) => (prev + 1) % screenshots.length);
+        }, 2000);
         return () => clearInterval(interval);
-    }, [inView, isPaused]);
-
-    const onDragEnd = (event: any, info: any) => {
-        const swipeThreshold = 50;
-        if (info.offset.x > swipeThreshold) {
-            setCurrentScreen((prev) => (prev - 1 + growthStages.length) % growthStages.length);
-        } else if (info.offset.x < -swipeThreshold) {
-            setCurrentScreen((prev) => (prev + 1) % growthStages.length);
-        }
-    };
+    }, [inView]);
 
     return (
-        <section className="py-24 px-6 overflow-hidden relative bg-[#FEF3B3]" ref={ref} id="how-it-works">
+        <section className="py-24 px-6 overflow-hidden relative bg-[#F2F4F7]" ref={ref} id="how-it-works">
             <div className="max-w-7xl mx-auto">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
-                    {/* Left: Phone Carousel */}
-                    <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-                        <div className="relative h-[600px] w-full max-w-[500px] flex items-center justify-center">
-                            {growthStages.map((stage, index) => {
-                                const position = (index - currentScreen + growthStages.length) % growthStages.length;
-                                let variants = {};
+                    {/* Left: Screenshot Carousel */}
+                    <div className="order-2 lg:order-1 flex flex-col items-center gap-6 w-full">
+                        <div className="relative w-full h-[600px] flex items-center justify-center gap-4 px-4">
+                            {screenshots.map((screen, index) => {
+                                const relativePosition = index - focusedIndex;
+                                const isFocused = index === focusedIndex;
 
-                                if (position === 0) {
-                                    variants = { x: 0, scale: 1, opacity: 1, zIndex: 20, rotate: 0 };
-                                } else if (position === 1) {
-                                    variants = { x: 140, scale: 0.85, opacity: 0.4, zIndex: 10, rotate: 0 };
-                                } else {
-                                    variants = { x: -140, scale: 0.85, opacity: 0.4, zIndex: 10, rotate: 0 };
+                                let xOffset = 0;
+                                let scale = 0.75;
+                                let opacity = 0.4;
+                                let zIndex = 0;
+
+                                if (isFocused) {
+                                    xOffset = 0;
+                                    scale = 1;
+                                    opacity = 1;
+                                    zIndex = 10;
+                                } else if (relativePosition === -1 || relativePosition === 2) {
+                                    // Left
+                                    xOffset = -180;
+                                    scale = 0.75;
+                                    opacity = 0.4;
+                                    zIndex = 5;
+                                } else if (relativePosition === 1 || relativePosition === -2) {
+                                    // Right
+                                    xOffset = 180;
+                                    scale = 0.75;
+                                    opacity = 0.4;
+                                    zIndex = 5;
                                 }
 
                                 return (
                                     <motion.div
                                         key={index}
                                         initial={false}
-                                        animate={variants}
-                                        transition={{ type: "spring", stiffness: 150, damping: 20 }}
-                                        drag="x"
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        dragElastic={0.05}
-                                        onDragEnd={onDragEnd}
-                                        onClick={() => setIsPaused(!isPaused)}
-                                        className="absolute w-64 md:w-80 cursor-grab active:cursor-grabbing"
+                                        animate={{
+                                            x: xOffset,
+                                            scale: scale,
+                                            opacity: opacity,
+                                            zIndex: zIndex
+                                        }}
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        className="absolute cursor-pointer"
+                                        onClick={() => setFocusedIndex(index)}
                                     >
-                                        <div className={`backdrop-blur-md bg-black rounded-[3.5rem] p-3 shadow-2xl border ${stage.borderColor}`}>
-                                            <div className="bg-background rounded-[3rem] overflow-hidden h-[600px] relative pointer-events-none select-none">
-                                                <div className="h-full overflow-hidden">
-                                                    <img
-                                                        src={stage.image}
-                                                        alt={stage.label}
-                                                        className="w-full h-full object-cover [image-rendering:optimize-contrast] rounded-[3rem] scale-x-110"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <img
+                                            src={screen.image}
+                                            alt={screen.label}
+                                            className="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl"
+                                        />
                                     </motion.div>
                                 );
                             })}
                         </div>
+
+                        {/* Indicator Dots */}
+                        <div className="flex gap-2 justify-center">
+                            {screenshots.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setFocusedIndex(index)}
+                                    className={`h-2 rounded-full transition-all ${index === focusedIndex ? 'bg-[#5B9BF5] w-8' : 'bg-[#1A2B6B]/20 w-2'
+                                        }`}
+                                />
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Right: Content Glass Card */}
-                    <div className="order-1 lg:order-2 space-y-10">
+                    {/* Right: Content */}
+                    <div className="order-1 lg:order-2 space-y-6">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={inView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8 }}
                             className="space-y-6 no-scrollbar overflow-hidden"
                         >
-                            <p className="text-sm uppercase tracking-wider text-[#75BAFF] mb-4 font-mono font-bold">
+                            <p className="text-sm uppercase tracking-wider text-[#5B9BF5] mb-4 font-mono font-bold">
                                 How It Works
                             </p>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#1D59BB] leading-[1.1] tracking-tighter">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#1A2B6B] leading-[1.1] tracking-tighter">
                                 Read it. <br />
                                 Prove it. <br />
-                                <span className="text-[#75BAFF]">Level up.</span>
+                                <span className="text-[#5B9BF5]">Level up.</span>
                             </h2>
-                            <p className="text-[#1D59BB]/80 text-lg md:text-xl font-medium leading-relaxed">
+                            <p className="text-[#1A2B6B]/80 text-lg md:text-xl font-medium leading-relaxed">
                                 Three steps. One loop. A reading habit that builds itself. Bookmarkk turns every chapter into proof of progress.
                             </p>
-
                         </motion.div>
                     </div>
                 </div>
             </div>
         </section>
-    );
-}
-
-function NumberTicker({ value }: { value: number }) {
-    const [displayValue, setDisplayValue] = useState(0);
-
-    useEffect(() => {
-        let startTimestamp: number | null = null;
-        const duration = 1500;
-        const startValue = displayValue;
-
-        const step = (timestamp: number) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(easeOutQuart * (value - startValue) + startValue);
-
-            setDisplayValue(current);
-
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-
-        window.requestAnimationFrame(step);
-    }, [value]);
-
-    return (
-        <motion.span
-            initial={false}
-            animate={{ opacity: 1 }}
-            className="font-black"
-        >
-            {displayValue}
-        </motion.span>
     );
 }

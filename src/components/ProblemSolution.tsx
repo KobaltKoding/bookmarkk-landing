@@ -9,63 +9,60 @@ export default function ProblemSolution() {
 
   const problems = [
     {
-      img: "/assets/Problem_Flow/guilt_hard.webp",
-      alt: "The struggle is real",
-      label: "The struggle is real",
-      yOffset: "",
+      img: "/assets/Problem_Flow/start_energy.jpg",
+      alt: "Week 1: You start with energy",
+      label: "Week 1: You start with energy",
       delay: 0
     },
     {
-      img: "/assets/Problem_Flow/start_energy.jpg",
-      alt: "You start with energy",
-      label: "You start with energy",
-      yOffset: "md:translate-y-12",
+      img: "/assets/Problem_Flow/guilt_hard.webp",
+      alt: "Week 2: You slowly slip",
+      label: "Week 2: You slowly slip",
       delay: 0.2
     },
     {
       img: "/assets/Problem_Flow/guilt.jpg",
-      alt: "The guilt piles up",
-      label: "The guilt piles up with the unread pages.",
-      yOffset: "",
+      alt: "Week 3: You reset to zero",
+      label: "Week 3: You reset to zero",
       delay: 0.4
     }
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-[#FEF3B3]" ref={ref}>
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+    <section className="py-12 md:py-16 px-6 relative overflow-hidden bg-[#FFF1C1]" ref={ref}>
+      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="space-y-6 max-w-3xl no-scrollbar overflow-hidden"
+          className="space-y-4 max-w-3xl no-scrollbar overflow-hidden"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-[#1D59BB] leading-[1.1]">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-[#1A2B6B] leading-[1.1]">
             Your bookshelf is a <br className="hidden md:block" />
-            graveyard of <span className="text-[#75BAFF]">intentions.</span>
+            graveyard of <span className="text-[#5B9BF5]">intentions.</span>
           </h2>
-          <p className="text-lg md:text-xl text-[#1D59BB]/80 leading-relaxed font-medium">
-            You don’t need motivation. You need a system. Bookmarkk is the system for reading mastery.
+          <p className="text-base md:text-lg text-[#1A2B6B]/80 leading-relaxed font-medium">
+            You don't need motivation. You need a system. Bookmarkk is the system for reading mastery.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
           {problems.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: item.delay }}
-              className={`space-y-6 flex flex-col items-center ${item.yOffset}`}
+              className="space-y-3 flex flex-col items-center"
             >
-              <div className="w-full aspect-[4/5] rounded-[2rem] bg-white shadow-2xl overflow-hidden border border-[#1D59BB]/5 group">
+              <div className="w-full aspect-square rounded-2xl shadow-xl overflow-hidden border border-[#1A2B6B]/5 group">
                 <img
                   src={item.img}
                   alt={item.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover scale-110 transition-transform duration-700 group-hover:scale-[1.15]"
                 />
               </div>
-              <p className="text-[#1D59BB] font-black text-center text-sm uppercase tracking-widest max-w-[250px]">
+              <p className="text-[#1A2B6B] font-black text-center text-xs uppercase tracking-widest max-w-[220px]">
                 {item.label}
               </p>
             </motion.div>
