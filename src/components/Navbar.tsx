@@ -8,7 +8,8 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Subtle scale-down on scroll for a premium feel
-  const navScale = useTransform(scrollY, [0, 50], [1, 0.98]);
+  const navScale = useTransform(scrollY, [0, 50], [1, 0.9]);
+  const navHeight = useTransform(scrollY, [0, 50], ["5rem", "4rem"]);
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
@@ -20,19 +21,21 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#FEF3B3] border-b border-[#1D59BB]/10`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#1A2B6B] border-b border-white/10`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      style={{ scale: navScale }}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <motion.div
+        style={{ scale: navScale, height: navHeight }}
+        className="w-full px-6 md:px-12 flex items-center justify-between"
+      >
         {/* Logo */}
         <a href="#" className="relative h-16 flex items-center overflow-hidden">
           <img
             src="/assets/Logo/bookmarkk text no bg.png"
             alt="Bookmarkk Logo"
-            className="h-full w-auto object-contain mix-blend-multiply scale-100"
+            className="h-full w-auto object-contain brightness-0 invert-[.9] sepia saturate-[20] hue-rotate-[15deg] brightness-[1.1]"
           />
         </a>
 
@@ -42,7 +45,7 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
             <motion.a
               key={link.label}
               href={link.href}
-              className="text-sm text-white/50 hover:text-white transition-colors"
+              className="text-sm text-[#1A2B6B]/60 hover:text-[#1A2B6B] transition-colors"
               whileHover={{ y: -1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -54,13 +57,13 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
         {/* CTA */}
         <motion.button
           onClick={onJoinClick}
-          className="bg-[#1D59BB] px-6 py-2.5 rounded-full text-sm font-semibold text-white shadow-lg transition-all"
+          className="bg-[#FEBD17] px-6 py-2.5 rounded-full text-sm font-semibold text-[#1A2B6B] shadow-lg transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
         >
           Join Waitlist
         </motion.button>
-      </div>
+      </motion.div>
     </motion.nav>
   );
 }

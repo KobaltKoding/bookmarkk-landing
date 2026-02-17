@@ -16,7 +16,7 @@ export default function VisualStats() {
     ];
 
     return (
-        <section className="py-24 px-6 relative overflow-hidden bg-[#FEF3B3]" ref={ref} id="rankings">
+        <section className="py-24 px-6 relative overflow-hidden bg-[#FFF1C1]" ref={ref} id="rankings">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
                 {/* Left: Test Image (Scaled to 90%) */}
@@ -27,7 +27,7 @@ export default function VisualStats() {
                     className="order-2 lg:order-1 flex justify-center lg:justify-start overflow-visible"
                 >
                     <div className="scale-[0.9] origin-center lg:origin-left min-w-[500px]">
-                        <div className="bg-[#1D59BB] rounded-[3.5rem] p-4 shadow-3xl relative overflow-hidden">
+                        <div className="bg-[#1A2B6B] rounded-[3.5rem] p-4 shadow-3xl relative overflow-hidden">
                             <div className="bg-white/5 absolute -top-40 -right-40 w-[30rem] h-[30rem] rounded-full blur-[100px]" />
                             <div className="relative z-10 p-10">
                                 <div className="flex justify-between items-center gap-6 mb-12">
@@ -38,11 +38,11 @@ export default function VisualStats() {
                                     {leaders.map((entry, i) => (
                                         <div
                                             key={i}
-                                            className={`flex items-center gap-5 p-5 rounded-3xl transition-all ${entry.active ? 'bg-[#FEF3B3] text-[#1D59BB] scale-105 shadow-2xl' : 'bg-white/10 text-white hover:bg-white/15'
+                                            className={`flex items-center gap-5 p-5 rounded-3xl transition-all ${entry.active ? 'bg-[#FFF1C1] text-[#1A2B6B] scale-105 shadow-2xl' : 'bg-white/10 text-white hover:bg-white/15'
                                                 }`}
                                         >
                                             <div className="w-10 font-black opacity-40 text-lg">#{entry.rank}</div>
-                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shadow-inner ${entry.active ? 'bg-[#1D59BB] text-white' : (entry.color || 'bg-white/20')
+                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shadow-inner ${entry.active ? 'bg-[#1A2B6B] text-white' : (entry.color || 'bg-white/20')
                                                 }`}>
                                                 {entry.avatar}
                                             </div>
@@ -59,26 +59,16 @@ export default function VisualStats() {
                     </div>
                 </motion.div> */}
 
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="order-2 lg:order-1 flex justify-center lg:justify-start"
-                >
-                    <div className="w-64 md:w-80 h-auto">
-                        <div className="backdrop-blur-md bg-black/80 border border-[#1D59BB]/10 rounded-[3.5rem] p-3 shadow-2xl">
-                            <div className="bg-background rounded-[3rem] overflow-hidden h-[600px] relative pointer-events-none select-none">
-                                <div className="h-full overflow-hidden">
-                                    <img
-                                        src="/assets/Screenshots/leaderboard_page.png"
-                                        alt="Leaderboard Rankings"
-                                        className="w-full h-full object-cover [image-rendering:optimize-contrast] rounded-[3rem] scale-x-110"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+                <div className="order-2 lg:order-1 relative lg:min-h-[500px]">
+                    <motion.img
+                        initial={{ opacity: 0, x: -100 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.8 }}
+                        src="/assets/Screenshots/leaderboard hand.png"
+                        alt="Leaderboard Rankings"
+                        className="w-auto h-[350px] object-contain drop-shadow-2xl mx-auto lg:mx-0 lg:absolute lg:left-0 lg:bottom-0 lg:h-[500px] scale-[2] -translate-x-[7.5%] translate-y-[20%]"
+                    />
+                </div>
 
                 {/* Right: Copy + Original Stats */}
                 <div className="order-1 lg:order-2 space-y-12">
@@ -88,12 +78,12 @@ export default function VisualStats() {
                         transition={{ duration: 0.8 }}
                         className="space-y-6 no-scrollbar overflow-hidden"
                     >
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter text-[#1D59BB]">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter text-[#1A2B6B]">
                             Reading is a <br />
-                            <span className="text-[#75BAFF]">Sport.</span>
+                            <span className="text-[#5B9BF5]">Sport.</span>
                         </h2>
-                        <p className="text-lg md:text-xl text-[#1D59BB]/80 leading-relaxed font-medium">
-                            Join clubs, earn limited-edition badges, and witness your growth on the global stage. Competition breeds consistency.
+                        <p className="text-lg md:text-xl text-[#1A2B6B]/80 leading-relaxed font-medium">
+                            Weekly leagues. XP you can't fake. Bragging rights you actually earned.
                         </p>
                     </motion.div>
 
@@ -103,14 +93,13 @@ export default function VisualStats() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="bg-white p-8 rounded-[2.5rem] border border-[#1D59BB]/5 shadow-xl flex flex-col items-center sm:items-start text-center sm:text-left"
+                            className="bg-[#1A2B6B] p-8 rounded-[2.5rem] border border-white/10 shadow-xl flex flex-col items-center sm:items-start text-center sm:text-left"
                         >
-                            <Trophy className="text-[#FEF3B3] mb-4" size={40} strokeWidth={2.5} />
-                            <div className="text-[#1D59BB] text-4xl font-black tracking-tighter">
-                                <NumberTicker value={88} />%
+                            <Trophy className="text-[#FEBD17] mb-4" size={40} strokeWidth={2.5} />
+                            <div className="text-white text-3xl font-black tracking-tight mb-2">
+                                88%
                             </div>
-                            <div className="font-black text-lg tracking-tight text-[#1D59BB] uppercase mt-1">Retention Rate</div>
-                            <p className="text-[10px] font-bold text-[#75BAFF] mt-2 uppercase tracking-widest leading-none">Monthly active consistency</p>
+                            <div className="font-bold text-sm tracking-tight text-white/90 mt-1">now reading 2+ days a week</div>
                         </motion.div>
 
                         {/* Stat 2: Growth */}
@@ -118,14 +107,14 @@ export default function VisualStats() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="bg-white p-8 rounded-[2.5rem] border border-[#1D59BB]/5 shadow-xl flex flex-col items-center sm:items-start text-center sm:text-left"
+                            className="bg-[#1A2B6B] p-8 rounded-[2.5rem] border border-white/10 shadow-xl flex flex-col items-center sm:items-start text-center sm:text-left"
                         >
                             <Flame className="text-orange-500 mb-4" size={40} strokeWidth={2.5} />
-                            <div className="text-[#1D59BB] text-4xl font-black tracking-tighter">
-                                <NumberTicker value={2.4} decimals={1} />x
+                            <div className="text-white text-3xl font-black tracking-tight mb-2">
+                                30%
                             </div>
-                            <div className="font-black text-lg tracking-tight text-[#1D59BB] uppercase mt-1">Reading Growth</div>
-                            <p className="text-[10px] font-bold text-[#75BAFF] mt-2 uppercase tracking-widest leading-none">Average volume multiplier</p>
+                            <div className="font-bold text-sm tracking-tight text-white/90 mt-1">reading almost daily</div>
+                            <p className="text-xs font-medium text-white/60 mt-2">No willpower required.</p>
                         </motion.div>
                     </div>
                 </div>
