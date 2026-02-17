@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Navbar onJoinClick={openWaitlist} />
-      <CanvasSequence />
+      {/* <CanvasSequence /> */}
       <main className="relative z-10">
         <Hero onJoinClick={openWaitlist} />
         <ProblemSolution />
@@ -37,7 +37,6 @@ export default function Home() {
         <VisualStats />
         {/* <Testimonials /> — Hidden until real testimonials */}
         <FinalCTA onJoinClick={openWaitlist} />
-        <div className="h-[50vh]" /> {/* Spacer for animation conclusion */}
       </main>
       <Footer onOpenLegal={openLegal} />
 

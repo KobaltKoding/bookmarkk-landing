@@ -16,8 +16,7 @@ export default function VisualStats() {
     ];
 
     return (
-        <section ref={ref} id="visual-stats" className="py-24 md:py-40 px-6 relative overflow-hidden">
-            <div className="absolute inset-0 bg-transparent -z-10" />
+        <section className="py-24 px-6 relative overflow-hidden bg-[#FEF3B3]" ref={ref} id="rankings">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
                 {/* Left: Test Image (Scaled to 90%) */}
@@ -87,11 +86,11 @@ export default function VisualStats() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8 }}
-                        className="backdrop-blur-md bg-white/10 p-8 md:p-12 rounded-3xl border border-white/20 shadow-xl space-y-6 no-scrollbar overflow-hidden"
+                        className="space-y-6 no-scrollbar overflow-hidden"
                     >
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter text-[#1D59BB]">
                             Reading is a <br />
-                            <span className="text-[#75BAFF] font-serif italic">Sport.</span>
+                            <span className="text-[#75BAFF]">Sport.</span>
                         </h2>
                         <p className="text-lg md:text-xl text-[#1D59BB]/80 leading-relaxed font-medium">
                             Join clubs, earn limited-edition badges, and witness your growth on the global stage. Competition breeds consistency.

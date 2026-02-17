@@ -287,8 +287,7 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
   const q = questions[currentQuestion];
 
   return (
-    <section className="py-24 px-6 relative" ref={ref} id="try-it">
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-sm -z-10" />
+    <section className="py-24 px-6 relative bg-[#FEF3B3]" ref={ref} id="try-it">
       <div className="max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -308,9 +307,9 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="rounded-[2.5rem] p-3 md:p-5 shadow-2xl flex flex-col min-h-[500px] backdrop-blur-[10px]"
+          className="rounded-[2.5rem] p-3 md:p-5 flex flex-col min-h-[500px] shadow-2xl"
           style={{
-            background: 'rgba(252, 252, 252, 0.8)',
+            background: '#ffffff',
             border: '1px solid rgba(29, 89, 187, 0.1)'
           }}
         >
@@ -544,9 +543,9 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
                       <motion.p
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center mt-4 text-[#808080] text-sm font-medium italic px-4"
+                        className="text-center mt-4 text-[#808080] text-sm font-medium px-4"
                       >
-                        &ldquo;{q.explanation}&rdquo;
+                        "{q.explanation}"
                       </motion.p>
                     )}
                   </div>

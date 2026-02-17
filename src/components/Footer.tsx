@@ -6,7 +6,7 @@ interface FooterProps {
 
 export default function Footer({ onOpenLegal }: FooterProps) {
   return (
-    <footer className="relative z-20 py-12 px-6 bg-transparent">
+    <footer className="relative z-20 py-12 px-6 bg-[#FEF3B3] border-t border-[#1D59BB]/5">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
           <span className="font-black text-xl text-[#1D59BB] tracking-tighter">bookmarkk</span>

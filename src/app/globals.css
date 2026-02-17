@@ -16,9 +16,9 @@
   /* Sky Blue */
   --color-text-muted: #75BAFFcc;
   /* Muted Sky Blue */
-  /* Geometric Sans-Serif Stack (Futura) */
   --font-sans: "Futura", "Futura-Medium", "Futura Medium", var(--font-outfit), system-ui, sans-serif;
   --font-serif: "Futura", "Futura-Bold", "Futura-Medium", var(--font-outfit), system-ui, sans-serif;
+  --font-mono: "Futura", "Futura-Medium", "Futura Medium", var(--font-outfit), monospace;
 }
 
 body {
