@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { BarChart3, Zap, Trophy, Users } from "lucide-react";
 
 const screenshots = [
     {
@@ -114,16 +115,33 @@ export default function HowItWorks() {
                             className="space-y-6 no-scrollbar overflow-hidden"
                         >
                             <p className="text-sm uppercase tracking-wider text-[#5B9BF5] mb-4 font-mono font-bold">
-                                How It Works
+                                Introducing
                             </p>
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#1A2B6B] leading-[1.1] tracking-tighter">
-                                Read it. <br />
-                                Prove it. <br />
-                                <span className="text-[#5B9BF5]">Level up.</span>
+                                Bookmarkk
                             </h2>
                             <p className="text-[#1A2B6B]/80 text-lg md:text-xl font-medium leading-relaxed">
-                                Three steps. One loop. A reading habit that builds itself. Bookmarkk turns every chapter into proof of progress.
+                                AI Habit builder for Readers.
                             </p>
+                            <div className="flex flex-wrap gap-3 mt-4">
+                                {[
+                                    { label: "Track your progress", icon: BarChart3, bg: "bg-[#5B9BF5]/15", text: "text-[#5B9BF5]" },
+                                    { label: "Get XP for finishing chapters", icon: Zap, bg: "bg-[#FEBD17]/15", text: "text-amber-600", fill: true },
+                                    { label: "Climb the leaderboard", icon: Trophy, bg: "bg-[#A855F7]/15", text: "text-[#A855F7]" },
+                                    { label: "Share with friends", icon: Users, bg: "bg-emerald-500/15", text: "text-emerald-500" },
+                                ].map((pill, i) => (
+                                    <motion.span
+                                        key={pill.label}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={inView ? { opacity: 1, y: 0 } : {}}
+                                        transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold ${pill.bg} ${pill.text}`}
+                                    >
+                                        <pill.icon className="w-4 h-4" {...(pill.fill ? { fill: "currentColor" } : {})} />
+                                        {pill.label}
+                                    </motion.span>
+                                ))}
+                            </div>
                         </motion.div>
                     </div>
                 </div>

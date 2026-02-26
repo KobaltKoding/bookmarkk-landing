@@ -38,11 +38,10 @@ export default function ProblemSolution() {
           className="space-y-4 max-w-3xl no-scrollbar overflow-hidden"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-[#1A2B6B] leading-[1.1]">
-            Your bookshelf is a <br className="hidden md:block" />
-            graveyard of <span className="text-[#5B9BF5]">intentions.</span>
+            Everyone wants to read more
           </h2>
           <p className="text-base md:text-lg text-[#1A2B6B]/80 leading-relaxed font-medium">
-            You don't need motivation. You need a system. Bookmarkk is the system for reading mastery.
+            Starting is easy. Sticking with it is the hard part.
           </p>
         </motion.div>
 
@@ -62,7 +61,7 @@ export default function ProblemSolution() {
                   className="w-full h-full object-cover scale-110 transition-transform duration-700 group-hover:scale-[1.15]"
                 />
               </div>
-              <p className="text-[#1A2B6B] font-black text-center text-xs uppercase tracking-widest max-w-[220px]">
+              <p className="text-[#1A2B6B] font-black text-center text-sm uppercase tracking-widest">
                 {item.label}
               </p>
             </motion.div>

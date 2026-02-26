@@ -91,51 +91,135 @@ const bookQuestions = {
             },
         ],
     },
-    "The Palace of Illusions": {
-        author: "Chitra Banerjee Divakaruni",
-        cover: "/assets/book-covers/palace.webp",
+    "Psychology of Money": {
+        author: "Morgan Housel",
+        cover: "/assets/book-covers/psychology_of_money.webp",
         questions: [
             {
                 id: 1,
-                question: "From whose perspective is this reimagining of the Mahabharata told?",
+                question: "What does Morgan Housel argue is the most important factor in financial success?",
                 options: [
-                    "Kunti",
-                    "Gandhari",
-                    "Panchaali (Draupadi)",
-                    "Subhadra",
+                    "Intelligence and education",
+                    "Behavior and psychology",
+                    "Access to insider information",
+                    "Starting with a large inheritance",
                 ],
-                correctAnswer: 2,
-                explanation: "The Palace of Illusions retells the Mahabharata from Draupadi's (Panchaali's) perspective, giving voice to her experiences and emotions.",
+                correctAnswer: 1,
+                explanation: "Housel argues that financial success is more about behavior than intelligence. How you behave with money matters more than what you know.",
             },
             {
                 id: 2,
-                question: "Who is the secret brother of the Pandavas that Panchaali feels a mysterious, tragic connection to?",
+                question: "What concept does Housel use to explain why people make different financial decisions?",
                 options: [
-                    "Karna",
-                    "Abhimanyu",
-                    "Dhrishtadyumna",
-                    "Vidura",
+                    "Risk tolerance profiles",
+                    "Economic class theory",
+                    "No one is crazy — everyone has different experiences",
+                    "Generational wealth gaps",
                 ],
-                correctAnswer: 0,
-                explanation: "Karna, the son of Kunti born before her marriage, is the secret half-brother of the Pandavas. Draupadi's complex feelings toward him are a central element of the story.",
+                correctAnswer: 2,
+                explanation: "Housel argues that no one is crazy — people make financial decisions based on their unique life experiences, which vary enormously from person to person.",
             },
             {
                 id: 3,
-                question: 'What event in the "Palace of Illusions" serves as a major catalyst for the conflict with Duryodhana?',
+                question: "What is the key lesson about compounding in the book?",
                 options: [
-                    "He is denied a room in the palace",
-                    "He falls into a pool of water he mistook for a floor",
-                    "He is poisoned at a banquet",
-                    "He loses a game of dice in the main hall",
+                    "Start investing as late as possible for maximum returns",
+                    "Warren Buffett's wealth came mostly after age 65 due to compounding",
+                    "Compounding only works for the ultra-wealthy",
+                    "You need to earn a high salary for compounding to matter",
                 ],
                 correctAnswer: 1,
-                explanation: "Duryodhana's humiliation when he falls into a pool in the palace of illusions, combined with Draupadi's laughter, becomes a key moment that fuels his hatred.",
+                explanation: "Housel highlights that the vast majority of Warren Buffett's wealth came after his 65th birthday, demonstrating the extraordinary power of long-term compounding.",
+            },
+        ],
+    },
+    "Harry Potter": {
+        author: "J.K. Rowling",
+        cover: "/assets/book-covers/hp.jpeg",
+        questions: [
+            {
+                id: 1,
+                question: "What is the core of Harry Potter's wand made from?",
+                options: [
+                    "Dragon heartstring",
+                    "Unicorn hair",
+                    "Phoenix feather",
+                    "Veela hair",
+                ],
+                correctAnswer: 2,
+                explanation: "Harry's wand contains a phoenix feather core — specifically from Fawkes, Dumbledore's phoenix, which also gave the feather in Voldemort's wand.",
+            },
+            {
+                id: 2,
+                question: "What does the Mirror of Erised show?",
+                options: [
+                    "The future",
+                    "The deepest desire of the viewer's heart",
+                    "Hidden enemies",
+                    "The truth about any person",
+                ],
+                correctAnswer: 1,
+                explanation: "The Mirror of Erised shows the deepest, most desperate desire of one's heart. 'Erised' is 'desire' spelled backwards.",
+            },
+            {
+                id: 3,
+                question: "What is a Horcrux?",
+                options: [
+                    "A powerful defensive spell",
+                    "A magical creature from the Forbidden Forest",
+                    "An object containing a piece of a wizard's soul",
+                    "A potion that grants immortality",
+                ],
+                correctAnswer: 2,
+                explanation: "A Horcrux is an object in which a Dark wizard has hidden a fragment of their soul for the purpose of attaining immortality.",
+            },
+        ],
+    },
+    "The Hunger Games": {
+        author: "Suzanne Collins",
+        cover: "/assets/book-covers/hunger.jpeg",
+        questions: [
+            {
+                id: 1,
+                question: "Why does Katniss volunteer as tribute?",
+                options: [
+                    "She wants fame and glory",
+                    "She is forced by the government",
+                    "To take her younger sister Prim's place",
+                    "To prove she is the strongest fighter",
+                ],
+                correctAnswer: 2,
+                explanation: "Katniss volunteers to take the place of her younger sister Primrose, whose name was drawn in the reaping for the 74th Hunger Games.",
+            },
+            {
+                id: 2,
+                question: "What is the name of the country where The Hunger Games takes place?",
+                options: [
+                    "Dystopia",
+                    "The Capitol",
+                    "New America",
+                    "Panem",
+                ],
+                correctAnswer: 3,
+                explanation: "The story is set in Panem, a nation built on the ruins of what was once North America, consisting of the Capitol and 12 (originally 13) districts.",
+            },
+            {
+                id: 3,
+                question: "What role does Haymitch Abernathy play in Katniss's journey?",
+                options: [
+                    "He is the Head Gamemaker",
+                    "He is her mentor and former Hunger Games victor",
+                    "He is the president of District 12",
+                    "He is a rebel spy from the Capitol",
+                ],
+                correctAnswer: 1,
+                explanation: "Haymitch is the only living Hunger Games victor from District 12 and serves as mentor to both Katniss and Peeta.",
             },
         ],
     },
     "Zero to One": {
         author: "Peter Thiel and Blake Masters",
-        cover: "/assets/book-covers/remarkable.webp",
+        cover: "/assets/book-covers/zero_to_one.webp",
         questions: [
             {
                 id: 1,
@@ -172,48 +256,6 @@ const bookQuestions = {
                 ],
                 correctAnswer: 1,
                 explanation: "The Power Law states that in venture capital, a small number of companies (often just one) will generate returns equal to or greater than the entire rest of the portfolio combined.",
-            },
-        ],
-    },
-    "Anxious People": {
-        author: "Fredrik Backman",
-        cover: "/assets/book-covers/anxious.jpeg",
-        questions: [
-            {
-                id: 1,
-                question: "What event serves as the primary catalyst for the story's plot?",
-                options: [
-                    "A bank robbery that turns into a hostage situation",
-                    "A bridge collapse in a small town",
-                    "A suspicious death at a wedding",
-                    "A missing child report",
-                ],
-                correctAnswer: 0,
-                explanation: "The story begins with a failed bank robbery that accidentally becomes a hostage situation at an apartment viewing, bringing together a group of anxious strangers.",
-            },
-            {
-                id: 2,
-                question: 'What was the "bank robber" actually trying to accomplish?',
-                options: [
-                    "To fund a luxury vacation",
-                    "To pay off gambling debts",
-                    "To get enough money to pay rent and keep their children",
-                    "To protest against the banking system",
-                ],
-                correctAnswer: 2,
-                explanation: "The robber was a desperate parent trying to get 6,500 kronor to pay rent and avoid losing custody of their children - a relatable human struggle rather than criminal intent.",
-            },
-            {
-                id: 3,
-                question: "What is the underlying theme that connects the characters trapped in the apartment?",
-                options: [
-                    "They are all secret relatives",
-                    'They all have shared anxieties and are "idiots" together',
-                    "They are all witnesses to the same crime from years ago",
-                    "They all work for the same corporation",
-                ],
-                correctAnswer: 1,
-                explanation: "The novel explores how all the characters are dealing with their own anxieties and imperfections, showing that we're all 'idiots' struggling through life together with compassion and humor.",
             },
         ],
     },
@@ -335,10 +377,10 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
                     className="text-center mb-10"
                 >
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.1] mb-4">
-                        <span className="text-[#FEBD17]">Test Your Knowledge</span>
+                        <span className="text-[#FEBD17]">Try a Bookmarkk quiz</span>
                     </h2>
                     <p className="text-lg text-white/80 font-medium max-w-xl mx-auto">
-                        Pick a book you've read. See if you really remember it.
+                        Our users love this feature, it makes finishing every chapter worth it.
                     </p>
                 </motion.div>
 
@@ -410,8 +452,7 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
                                             Choose Your Book
                                         </label>
                                         <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto">
-                                            {/* Row 1: 3 Items */}
-                                            {availableBooks.slice(0, 3).map((book) => {
+                                            {availableBooks.map((book) => {
                                                 const bookData = bookQuestions[book as keyof typeof bookQuestions];
                                                 const isSelected = selectedBook === book;
                                                 return (
@@ -437,36 +478,6 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
                                                     </motion.button>
                                                 );
                                             })}
-
-                                            {/* Row 2: 2 Items Centered via Flexbox spanning all columns */}
-                                            <div className="col-span-3 flex justify-center gap-4">
-                                                {availableBooks.slice(3, 5).map((book) => {
-                                                    const bookData = bookQuestions[book as keyof typeof bookQuestions];
-                                                    const isSelected = selectedBook === book;
-                                                    return (
-                                                        <motion.button
-                                                            key={book}
-                                                            onClick={() => setSelectedBook(book)}
-                                                            whileHover={{ y: -4 }}
-                                                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                                                            className="relative group w-[calc(33.33%-0.66rem)]" // Match grid item width (approx 1/3 minus gap share)
-                                                        >
-                                                            <div className={`relative aspect-[2/3] rounded-md overflow-hidden shadow-lg transition-all border-4 ${isSelected ? 'border-[#FEBD17]' : 'border-transparent'
-                                                                }`}
-                                                                style={{
-                                                                    boxShadow: isSelected ? '0 0 20px rgba(254,189,23,0.4)' : 'inset 2px 0 4px rgba(0,0,0,0.2)'
-                                                                }}
-                                                            >
-                                                                <img
-                                                                    src={bookData.cover}
-                                                                    alt={book}
-                                                                    className="w-full h-full object-cover"
-                                                                />
-                                                            </div>
-                                                        </motion.button>
-                                                    );
-                                                })}
-                                            </div>
                                         </div>
                                     </div>
 

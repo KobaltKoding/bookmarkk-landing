@@ -23,6 +23,11 @@ const BOOKS_LIST = [
   { id: 15, title: "Anxious People", author: "Fredrik Backman", cover: "/assets/book-covers/anxious.jpeg" },
   { id: 16, title: "Ikigai", author: "Héctor García", cover: "/assets/book-covers/ikiagi.jpeg" },
   { id: 17, title: "The Palace of Illusions", author: "Chitra Banerjee", cover: "/assets/book-covers/palace.webp" },
+  { id: 18, title: "The Hobbit", author: "J.R.R. Tolkien", cover: "/assets/book-covers/hobbit.jpeg" },
+  { id: 19, title: "The Fallen Gates", author: "G.M. Gabriels", cover: "/assets/book-covers/fallen_gates.jpeg" },
+  { id: 20, title: "It Ends with Us", author: "Colleen Hoover", cover: "/assets/book-covers/it_ends_with_us.jpg" },
+  { id: 21, title: "Game of Thrones", author: "George R.R. Martin", cover: "/assets/book-covers/game_of_thrones.jpeg" },
+  { id: 22, title: "Fire & Blood", author: "George R.R. Martin", cover: "/assets/book-covers/fire_and_blood.jpg" },
 ];
 
 // Fisher-Yates shuffle algorithm
@@ -63,12 +68,12 @@ export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
             className="text-left space-y-8 max-w-[50%]"
           >
             <h1 className="text-6xl font-black leading-[1.1] tracking-tighter mb-8 text-white">
-              <span className="text-[#FEBD17] drop-shadow-sm">Stop wanting to read.</span>
+              <span className="text-[#FEBD17] drop-shadow-sm">Stop wanting to read,</span>
               <br />
-              <span className="text-white drop-shadow-sm">Start being a Reader.</span>
+              <span className="text-white drop-shadow-sm">start becoming a reader.</span>
             </h1>
             <p className="text-xl text-white/70 mb-12 leading-relaxed font-medium max-w-xl">
-              <strong className="text-white font-bold">Bookmarkk</strong> turns every chapter into <span className="text-[#FEBD17] font-bold">proof of progress.</span>
+              <strong className="text-white font-bold">Bookmarkk</strong> turns your <span className="text-[#FEBD17] font-bold">good intentions</span> into a <span className="text-[#FEBD17] font-bold">real habit</span>
             </p>
           </motion.div>
         </div>
@@ -85,20 +90,20 @@ export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
             className="text-center space-y-8"
           >
             <h1 className="text-4xl md:text-5xl font-black leading-[1.1] tracking-tighter mb-8 text-white">
-              <span className="text-[#FEBD17] drop-shadow-sm">Stop wanting to read.</span>
+              <span className="text-[#FEBD17] drop-shadow-sm">Stop wanting to read,</span>
               <br />
-              <span className="text-white drop-shadow-sm">Start being a Reader.</span>
+              <span className="text-white drop-shadow-sm">start becoming a reader.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/70 leading-relaxed font-medium max-w-xl mx-auto">
-              <strong className="text-white font-bold">Bookmarkk</strong> turns every chapter into <span className="text-[#FEBD17] font-bold">proof of progress.</span>
+              <strong className="text-white font-bold">Bookmarkk</strong> turns your <span className="text-[#FEBD17] font-bold">good intentions</span> into a <span className="text-[#FEBD17] font-bold">real habit</span>
             </p>
           </motion.div>
         </div>
 
         {/* Mobile: Horizontal Marquees - 2x faster */}
         <div className="flex flex-col gap-3 pb-6">
-          <BookMarquee items={books} direction="horizontal" speed={120} />
-          <BookMarquee items={[...books].reverse()} direction="horizontal" speed={105} reverse />
+          <BookMarquee items={books} direction="horizontal" speed={180} />
+          <BookMarquee items={[...books].reverse()} direction="horizontal" speed={160} reverse />
         </div>
       </div>
     </section>
