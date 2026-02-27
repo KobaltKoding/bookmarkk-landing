@@ -29,8 +29,8 @@ export default function BookMarquee({
     const containerRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<HTMLDivElement>(null);
 
-    // We double the items to create the seamless visual loop
-    const duplicatedItems = [...items, ...items, ...items];
+    // Quadruple items for seamless looping — scroll through 25% then reset
+    const duplicatedItems = [...items, ...items, ...items, ...items];
 
     return (
         <div
@@ -43,8 +43,8 @@ export default function BookMarquee({
                 className={`flex ${direction === "vertical" ? "flex-col" : "flex-row"} gap-4`}
                 animate={{
                     [direction === "vertical" ? "y" : "x"]: reverse
-                        ? ["-33.33%", "0%"]
-                        : ["0%", "-33.33%"]
+                        ? ["-25%", "0%"]
+                        : ["0%", "-25%"]
                 }}
                 transition={{
                     duration: (items.length * 150) / speed, // Dynamic duration based on content length
