@@ -38,7 +38,7 @@ export default function ProblemSolution() {
           className="space-y-4 max-w-3xl no-scrollbar overflow-hidden"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-[#1A2B6B] leading-[1.1]">
-            Everyone wants to read more
+            Everyone wants to read more!
           </h2>
           <p className="text-base md:text-lg text-[#1A2B6B]/80 leading-relaxed font-medium">
             Starting is easy. Sticking with it is the hard part.

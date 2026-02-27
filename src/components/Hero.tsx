@@ -40,12 +40,29 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled;
 };
 
+// Partition a shuffled array into N roughly-equal chunks (no book appears in two chunks)
+const partitionArray = <T,>(array: T[], parts: number): T[][] => {
+  const shuffled = shuffleArray(array);
+  const result: T[][] = Array.from({ length: parts }, () => []);
+  shuffled.forEach((item, i) => {
+    result[i % parts].push(item);
+  });
+  return result;
+};
+
+// Deterministic initial split (no shuffle) for SSR — avoids empty state
+const initialColumns: typeof BOOKS_LIST[] = [
+  BOOKS_LIST.filter((_, i) => i % 3 === 0),
+  BOOKS_LIST.filter((_, i) => i % 3 === 1),
+  BOOKS_LIST.filter((_, i) => i % 3 === 2),
+];
+
 export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
-  // Randomize on client-side only to avoid hydration mismatch
-  const [books, setBooks] = useState(BOOKS_LIST);
+  // Start with deterministic split, then re-shuffle on client to randomize
+  const [columns, setColumns] = useState(initialColumns);
 
   useEffect(() => {
-    setBooks(shuffleArray(BOOKS_LIST));
+    setColumns(partitionArray(BOOKS_LIST, 3));
   }, []);
 
   return (
@@ -54,9 +71,9 @@ export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
       <div className="hidden lg:block min-h-screen relative">
         {/* Desktop: Vertical Marquees — absolute, full section height */}
         <div className="absolute top-0 bottom-0 right-0 w-[45%] flex gap-6 px-12 z-0">
-          <BookMarquee items={books} direction="vertical" speed={20} className="w-1/3 h-full" />
-          <BookMarquee items={[...books].reverse()} direction="vertical" speed={15} reverse className="w-1/3 pt-24 h-full" />
-          <BookMarquee items={books} direction="vertical" speed={25} className="w-1/3 pt-12 h-full" />
+          {columns[0] && <BookMarquee items={columns[0]} direction="vertical" speed={20} className="w-1/3 h-full" />}
+          {columns[1] && <BookMarquee items={columns[1]} direction="vertical" speed={15} reverse className="w-1/3 pt-24 h-full" />}
+          {columns[2] && <BookMarquee items={columns[2]} direction="vertical" speed={25} className="w-1/3 pt-12 h-full" />}
         </div>
 
         {/* Desktop: Text Content */}
@@ -100,11 +117,13 @@ export default function Hero({ onJoinClick }: { onJoinClick?: () => void }) {
           </motion.div>
         </div>
 
-        {/* Mobile: Horizontal Marquees - 2x faster */}
-        <div className="flex flex-col gap-3 pb-6">
-          <BookMarquee items={books} direction="horizontal" speed={180} />
-          <BookMarquee items={[...books].reverse()} direction="horizontal" speed={160} reverse />
-        </div>
+        {/* Mobile: Horizontal Marquees - 2x faster, split books across rows */}
+        {columns.length > 0 && (
+          <div className="flex flex-col gap-3 pb-6">
+            <BookMarquee items={[...columns[0], ...(columns[2]?.slice(0, Math.ceil((columns[2]?.length ?? 0) / 2)) ?? [])]} direction="horizontal" speed={180} />
+            <BookMarquee items={[...columns[1], ...(columns[2]?.slice(Math.ceil((columns[2]?.length ?? 0) / 2)) ?? [])]} direction="horizontal" speed={160} reverse />
+          </div>
+        )}
       </div>
     </section>
   );
