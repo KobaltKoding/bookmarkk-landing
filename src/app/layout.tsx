@@ -9,17 +9,17 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Bookmarkk — Turn Reading Into a Sport You Can Win",
+  title: "Bookmarkk — Turn your good intentions into a real habit",
   description:
-    "Bookmarkk is Strava for books. Prove your progress with AI quizzes, compete in weekly leagues, and build a reading identity. Join the waitlist.",
+    "Prove your progress with AI quizzes, compete in weekly leagues, and build a reading identity. Join the waitlist now!",
   icons: {
     icon: "/bookmarkk.jpeg",
     apple: "/bookmarkk.jpeg",
   },
   openGraph: {
-    title: "Bookmarkk — Turn Reading Into a Sport You Can Win",
+    title: "Bookmarkk — Turn your good intentions into a real habit",
     description:
-      "Prove your progress with AI quizzes, compete in weekly leagues, and build a reading identity.",
+      "Prove your progress with AI quizzes, compete in weekly leagues, and build a reading identity. Join the waitlist now!",
     type: "website",
   },
 };
