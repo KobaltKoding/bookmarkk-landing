@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { X, Zap } from "lucide-react";
 import confetti from "canvas-confetti";
+import { usePostHog } from "posthog-js/react";
 
 // [... keeping all bookQuestions data exactly the same - copying from original ...]
 const bookQuestions = {
@@ -264,6 +265,8 @@ const bookQuestions = {
 const availableBooks = Object.keys(bookQuestions);
 
 export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => void }) {
+    const posthog = usePostHog();
+    const quizStartedAtRef = useRef<number | null>(null);
     const ref = useRef(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -281,17 +284,18 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
         let timer: NodeJS.Timeout;
         if (started && !finished && timeLeft > 0) {
             timer = setInterval(() => {
-                setTimeLeft((prev) => {
-                    if (prev <= 1) {
-                        setFinished(true);
-                        return 0;
-                    }
-                    return prev - 1;
-                });
+                setTimeLeft((prev) => prev - 1);
             }, 1000);
         }
         return () => clearInterval(timer);
-    }, [started, finished]);
+    }, [started, finished, timeLeft]);
+
+    useEffect(() => {
+        if (started && !finished && timeLeft <= 0) {
+            captureQuizCompleted("timeout");
+            setFinished(true);
+        }
+    }, [timeLeft, started, finished]);
 
     // Trigger confetti on completion
     useEffect(() => {
@@ -338,11 +342,30 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
         if (selectedAnswer === null || answered) return;
 
         setAnswered(true);
-        if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+        const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+        posthog?.capture("quiz_answer_selected", {
+            book: selectedBook,
+            question_index: currentQuestion,
+            is_correct: isCorrect,
+        });
+        if (isCorrect) {
             setScore((s) => s + 1);
             setShowXP(true);
             setTimeout(() => setShowXP(false), 2000);
         }
+    };
+
+    const captureQuizCompleted = (completedBy: string) => {
+        const durationSeconds = quizStartedAtRef.current
+            ? Math.round((Date.now() - quizStartedAtRef.current) / 1000)
+            : undefined;
+        posthog?.capture("quiz_completed", {
+            book: selectedBook,
+            score,
+            total: questions.length,
+            completed_by: completedBy,
+            duration_seconds: durationSeconds,
+        });
     };
 
     const nextQuestion = () => {
@@ -351,6 +374,7 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
             setSelectedAnswer(null);
             setAnswered(false);
         } else {
+            captureQuizCompleted("answered_all");
             setFinished(true);
         }
     };
@@ -482,7 +506,11 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
                                     </div>
 
                                     <button
-                                        onClick={() => setStarted(true)}
+                                        onClick={() => {
+                                            posthog?.capture("quiz_started", { book: selectedBook });
+                                            quizStartedAtRef.current = Date.now();
+                                            setStarted(true);
+                                        }}
                                         className="w-full bg-[#FEBD17] hover:bg-[#FFD54F] text-[#1A2B6B] py-3 rounded-xl font-black text-base transition-colors mt-auto uppercase tracking-wider shadow-lg"
                                     >
                                         Start Quiz
@@ -539,7 +567,10 @@ export default function InteractiveQuiz({ onJoinClick }: { onJoinClick?: () => v
 
                                     <div className="space-y-3 w-full">
                                         <button
-                                            onClick={onJoinClick}
+                                            onClick={() => {
+                                                posthog?.capture("cta_clicked", { location: "quiz_results" });
+                                                onJoinClick?.();
+                                            }}
                                             className="w-full bg-[#FEBD17] hover:bg-[#FFD54F] text-[#1A2B6B] py-3 rounded-xl font-black text-base transition-colors uppercase tracking-wider shadow-lg"
                                         >
                                             Join Waitlist

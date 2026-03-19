@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import PostHogProvider from "@/components/PostHogProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -34,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} antialiased`}>
       <body className="bg-background text-foreground antialiased selection:bg-[#C05746]/20">
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );

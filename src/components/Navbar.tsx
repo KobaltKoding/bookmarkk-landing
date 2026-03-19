@@ -2,8 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePostHog } from "posthog-js/react";
 
 export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
+  const posthog = usePostHog();
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -56,7 +58,10 @@ export default function Navbar({ onJoinClick }: { onJoinClick?: () => void }) {
 
         {/* CTA */}
         <motion.button
-          onClick={onJoinClick}
+          onClick={() => {
+            posthog?.capture("cta_clicked", { location: "navbar" });
+            onJoinClick?.();
+          }}
           className="bg-[#FEBD17] px-6 py-2.5 rounded-full text-sm font-semibold text-[#1A2B6B] shadow-lg transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}

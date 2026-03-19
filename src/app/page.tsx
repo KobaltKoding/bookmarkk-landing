@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePostHog } from "posthog-js/react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProblemSolution from "@/components/ProblemSolution";
@@ -15,11 +16,15 @@ import WaitlistModal from "@/components/WaitlistModal";
 import LegalModal from "@/components/LegalModal";
 
 export default function Home() {
+  const posthog = usePostHog();
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [isLegalOpen, setIsLegalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<"privacy" | "terms">("privacy");
 
-  const openWaitlist = () => setIsWaitlistOpen(true);
+  const openWaitlist = () => {
+    posthog?.capture("waitlist_modal_opened");
+    setIsWaitlistOpen(true);
+  };
   const openLegal = (tab: "privacy" | "terms") => {
     setLegalTab(tab);
     setIsLegalOpen(true);

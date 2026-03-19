@@ -2,8 +2,10 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { usePostHog } from "posthog-js/react";
 
 export default function FinalCTA({ onJoinClick }: { onJoinClick?: () => void }) {
+  const posthog = usePostHog();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -27,7 +29,10 @@ export default function FinalCTA({ onJoinClick }: { onJoinClick?: () => void }) 
               Join the waitlist today and be the first to experience the system that turns every page into progress.
             </p>
             <motion.button
-              onClick={onJoinClick}
+              onClick={() => {
+                posthog?.capture("cta_clicked", { location: "final_cta" });
+                onJoinClick?.();
+              }}
               className="bg-[#FEBD17] hover:bg-[#FFD54F] px-10 py-5 rounded-full text-lg font-black text-[#1A2B6B] shadow-[0_0_30px_rgba(254,189,23,0.3)] hover:shadow-[0_0_40px_rgba(255,213,79,0.5)] transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
